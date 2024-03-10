@@ -1,0 +1,20 @@
+.Head {
+    display: flex;
+    flex: 0 0 auto;
+    -webkit-box-align: center;
+    align-items: center;
+    justify-content: stretch;
+    height: 72px;
+    padding: 0px 20px;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(219, 219, 219);
+    /* font-family: "Cera CY", Helvetica, Arial, sans-serif; */
+    font-size: 16px;
+    line-height: 24px;
+    /* color: rgb(131, 58, 224); */
+    z-index: 1;
+}
+
+.Head > * {
+    flex-grow: 1;
+}

@@ -1,0 +1,12 @@
+.ButtonForm {
+    width: 100%;
+    background-color: #2633cb;
+    border: none;
+    color: #fff;
+}
+
+.ButtonForm:hover {
+    background-color: #3c47d0 !important;
+    border: none;
+    color: #fff !important;
+}

@@ -1,0 +1,19 @@
+.MainModulesLayout {
+    overflow: hidden auto;
+    scroll-behavior: smooth;
+    padding: 20px 50px 0;
+    flex-grow: 1;
+}
+
+.MainModulesLayout::-webkit-scrollbar {
+    width: 8px;
+}
+
+.MainModulesLayout::-webkit-scrollbar-track {
+    background: none;
+}
+
+.MainModulesLayout::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: #a0a1a3;
+}

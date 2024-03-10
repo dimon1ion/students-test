@@ -1,0 +1,16 @@
+.DropdownItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: black;
+}
+
+.DropdownItem:hover {
+    color: #2633cb;
+}
+
+.DropdownItem-image {
+    width: 16px;
+    height: 16px;
+}

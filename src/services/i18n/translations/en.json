@@ -1,0 +1,33 @@
+{
+  "title": "Shop",
+  "menu.main": "Main",
+  "menu.chat": "Chat",
+  "basket.title": "Cart",
+  "basket.open": "Open",
+  "basket.close": "Close",
+  "basket.inBasket": "In cart",
+  "basket.empty": "empty",
+  "basket.total": "Total",
+  "basket.unit": "pcs",
+  "basket.delete": "Delete",
+  "basket.articles": {
+    "one": "article",
+    "other": "articles"
+  },
+  "basket.add-more": "Select more products",
+  "article.add": "Add",
+  "filter.reset": "Reset",
+  "auth.title": "Sign In",
+  "auth.login": "Login",
+  "auth.password": "Password",
+  "auth.signIn": "Sign in",
+  "session.signIn": "Sign In",
+  "session.signOut": "Sign Out",
+  "counter-modal.title": "Entering the quantity of goods",
+  "modal.close": "Close",
+  "couter-modal.form.title": "Enter the quantity of the product:",
+  "catalog-modal.title": "Catalog",
+  "catalog-modal.selected": "Selected",
+  "catalog-modal.add": "Add highlighted products",
+  "catalog1": "1products"
+}

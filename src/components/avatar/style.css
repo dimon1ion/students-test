@@ -1,0 +1,58 @@
+.Avatar {
+    display: flex;
+    max-width: 176px;
+    height: 46px;
+    -webkit-box-align: center;
+    align-items: center;
+    border-radius: 6px;
+    transition: background-color 0.05s ease-in 0s;
+    cursor: pointer;
+}
+
+.Avatar:hover {
+    color: #2633cb;
+}
+
+.Avatar-imageWrapper {
+    width: 36px;
+    height: 36px;
+}
+
+.Avatar-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.Avatar-title {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    -webkit-box-pack: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-left: 8px;
+    margin-right: 8px;
+    max-width: 140px;
+    text-wrap: balance;
+    
+}
+
+.Avatar-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    line-height: 16px;
+}
+
+.Avatar-arrow {
+    width: 16px;
+    height: 16px;
+    transition: all ease-in-out .2s;
+}
+
+.Avatar-arrow_open {
+    transform: rotate(-180deg);
+}

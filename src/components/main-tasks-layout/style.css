@@ -1,0 +1,32 @@
+.MainTasksLayout {
+    padding-top: 40px;
+}
+
+.MainTasksLayout:not(:first-child) {
+    border-top: solid 1px rgb(216, 219, 226);
+}
+
+.MainTasksLayout-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 10px;
+    margin: 0 0 14px 0;
+}
+
+.MainTasksLayout-title {
+    color: rgb(15, 28, 44);
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
+
+.MainTasksLayout-children {
+    display: flex;
+    flex-flow: wrap;
+    justify-content: left;
+    /* margin: 0px -36px; */
+    margin: 0px;
+    padding: 3px 12px 32px;
+}
