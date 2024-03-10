@@ -22,7 +22,9 @@ export type ISessionResponseSignIn = ISessionResponse<{
     user: ISessionUser;
 }>;
 
-export type ISessionResponseRemind = ISessionResponse<ISessionUser>;
+export type ISessionResponseRemind = ISessionResponse<{
+  user: ISessionUser;
+}>;
 
 export interface ISessionUser {
   id: number,

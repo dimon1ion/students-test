@@ -102,6 +102,7 @@ class SessionState extends StoreModule<ISessionInitState, ISessionConfig> {
       this.services.api.setHeader(this.config.tokenHeader, "Bearer " + token);
       // Проверяем токен выбором своего профиля
       const res = await this.services.api.request<ISessionResponseRemind>({url: '/api/v1/auth/current/user'});
+      console.log(res);
 
       if (res.data.status === "fail") {
         // Удаляем плохой токен
@@ -112,7 +113,7 @@ class SessionState extends StoreModule<ISessionInitState, ISessionConfig> {
         }, 'Сессии нет');
       } else {
         this.setState({
-          ...this.getState(), token: token, user: res.data.data, exists: true, waiting: false
+          ...this.getState(), token: token, user: res.data.data.user, exists: true, waiting: false
         }, 'Успешно вспомнили сессию');
       }
     } else {
