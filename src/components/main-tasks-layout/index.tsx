@@ -6,20 +6,20 @@ import { ModuleStatus } from "@src/types";
 
 export interface IMainTasksLayoutProps {
   title: string;
-  status: ModuleStatus;
+  status?: ModuleStatus;
   children: React.ReactNode;
-  onButtonClick: (status: ModuleStatus) => void;
+  onButtonClick?: (status?: ModuleStatus) => void;
 }
-function MainTasksLayout(props: IMainTasksLayoutProps) {
+function MainTasksLayout({onButtonClick = () => {}, ...props}: IMainTasksLayoutProps) {
   const cn = bem("MainTasksLayout");
 
   const render = {
     button: useMemo(() => {
       switch (props.status) {
         case "ready":
-          return <Button type={"primary"} onClick={() => props.onButtonClick(props.status)}>Начать тест</Button>;
+          return <Button type={"primary"} onClick={() => onButtonClick(props.status)}>Начать тест</Button>;
         case "started":
-          return <Button danger type={"default"} onClick={() => props.onButtonClick(props.status)}>Завершить тест</Button>
+          return <Button danger type={"default"} onClick={() => onButtonClick(props.status)}>Завершить тест</Button>
         default:
           return <></>
       }

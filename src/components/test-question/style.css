@@ -1,0 +1,26 @@
+.TestQuestion {
+    color: white;
+    font-family: "Montserrat", sans-serif;
+}
+
+.TestQuestion:not(:first-child) {
+    margin: 40px 0;
+}
+
+.TestQuestion-question {
+    font-weight: 600;
+    font-size: 16px;
+
+}
+
+.TestQuestion-answers {
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.TestQuestion-answer {
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}

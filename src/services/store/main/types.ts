@@ -9,7 +9,7 @@ export interface IModuleData {
   id: string | number; //id Модуля, я пока не знаю какого типа у тебя будут ID
   title: string; //название Модуля
   data: IModuleTask[]; //все задания этого модуля
-  status: ModuleStatus; //статус модуля
+  status?: ModuleStatus; //статус модуля
 }
 
 export interface IModuleTask {

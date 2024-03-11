@@ -11,8 +11,11 @@ import MainContent from "@src/components/main-content";
 import MainModules from "@src/containers/main-modules";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
+import MainNavigation from "@src/containers/main-navigation";
+import useTitle from "@src/hooks/use-title";
 
 function Main() {
+  useTitle("Главная");
   const store = useStore();
   const [isOpenDropdown, setIsOpenDropdown] = useState<boolean>(false);
   const ref = useRef(null);
@@ -59,7 +62,7 @@ function Main() {
     <PageLayout>
       <Head>
         <SideLayout side={"between"}>
-          <div></div>
+          <MainNavigation/>
           <Dropdown open={isOpenDropdown} menu={{ items: options.items }} trigger={["click"]}>
             <div ref={ref} onClick={() => callbacks.toggleOpen()}>
               <Avatar

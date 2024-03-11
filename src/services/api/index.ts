@@ -3,19 +3,17 @@ import { APIConfig, ApiRequest, ApiResponse } from "./types";
 
 class APIService {
   services: Services;
-  config: Partial<APIConfig>;
+  config: APIConfig;
   defaultHeaders: Record<string, string>;
 
   /**
    * @param services {Services} Менеджер сервисов
    * @param config {Object}
    */
-  constructor(services: Services, config: Partial<APIConfig> = {}) {
+  constructor(services: Services, config: APIConfig = {} as APIConfig) {
     this.services = services;
     this.config = config
-    this.defaultHeaders = {
-      'Content-Type': 'application/json',
-    }
+    this.defaultHeaders = config.defaultHeaders;
   }
   /**
    * HTTP запрос

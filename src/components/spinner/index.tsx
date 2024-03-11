@@ -1,14 +1,16 @@
 import {memo} from "react";
 import './style.css';
+import { Spin, SpinProps } from "antd";
 
 interface SpinnerProps {
   active: boolean,
-  children: React.ReactNode,
+  children?: React.ReactNode,
+  size?: SpinProps["size"]
 }
 
-function Spinner({active, children}: SpinnerProps) {
+function Spinner({size, active, children}: SpinnerProps) {
   if (active) {
-    return <div className="Spinner" aria-disabled>{children}</div>
+    return <Spin spinning delay={500} size={size}>{children}</Spin>
   } else {
     return children;
   }

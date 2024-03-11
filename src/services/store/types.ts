@@ -31,3 +31,9 @@ export type StoreInitStates = {
 export type StoreConfigs = {
     [Key in BasicStoreModuleKeys]: ReturnType<BasicStoreModules[Key]["initConfig"]>
 }
+
+export interface IServerResponse<T> {
+    data: T;
+    message: string;
+    status: string;
+}

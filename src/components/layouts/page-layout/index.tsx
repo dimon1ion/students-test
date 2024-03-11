@@ -4,16 +4,17 @@ import {cn as bem} from '@bem-react/classname';
 import "./style.css";
 
 interface IPageLayoutProps {
-  children: React.ReactNode
+  children?: React.ReactNode,
+  position?: "center",
 }
 
-function PageLayout({children}: IPageLayoutProps) {
+function PageLayout(props: IPageLayoutProps) {
 
   const cn = bem('PageLayout');
 
   return (
-    <div className={cn()}>
-        {children}
+    <div className={cn({position: props.position})}>
+        {props.children}
     </div>
   );
 }

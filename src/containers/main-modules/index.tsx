@@ -17,10 +17,11 @@ function MainModules() {
   }));
 
   const callbacks = {
-    onButtonClick: useCallback((status: ModuleStatus) => {},
+    onButtonClick: useCallback((status?: ModuleStatus) => {},
     []),
     onTaskClick: useCallback((taskId: number | string, taskType: TaskType) => {
-      navigate(`${taskType}/${taskId}`);
+      console.log(`task/${taskType}/${taskId}`);
+      navigate(`task/${taskType}/${taskId}`);
     }, [navigate]),
   };
 
@@ -28,7 +29,6 @@ function MainModules() {
     {
       id: "mod1",
       title: "Модуль 1",
-      status: "started",
       data: [
         {
           taskId: "1",
@@ -36,47 +36,63 @@ function MainModules() {
           status: "during",
           title: "Тестирование",
         },
-        {
-          taskId: "task2",
-          taskType: "test",
-          title: "Выбери соответствие",
-          status: "ready",
-        },
-        {
-          taskId: "task3",
-          taskType: "test",
-          title: "Сделай еще что нибудь пожалуйста, нам это очень надоо",
-          status: "ready",
-        },
-      ],
-    },
-    {
-      id: "mod2",
-      title: "Модуль 2",
-      status: "ready",
-      data: [
-        {
-          taskId: "task4",
-          taskType: "test",
-          title: "Тестирование",
-          status: "ready"
-        },
-      ],
-    },
-    {
-      id: "mod3",
-      title: "Модуль 3",
-      status: "ready",
-      data: [
-        {
-          taskId: "task5",
-          taskType: "test",
-          title: "Тестирование",
-          status: "ready",
-        },
       ],
     },
   ];
+
+  // const select2: IModuleData[] = [
+  //   {
+  //     id: "mod1",
+  //     title: "Модуль 1",
+  //     status: "started",
+  //     data: [
+  //       {
+  //         taskId: "1",
+  //         taskType: "test",
+  //         status: "during",
+  //         title: "Тестирование",
+  //       },
+  //       {
+  //         taskId: "task2",
+  //         taskType: "test",
+  //         title: "Выбери соответствие",
+  //         status: "ready",
+  //       },
+  //       {
+  //         taskId: "task3",
+  //         taskType: "test",
+  //         title: "Сделай еще что нибудь пожалуйста, нам это очень надоо",
+  //         status: "ready",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: "mod2",
+  //     title: "Модуль 2",
+  //     status: "ready",
+  //     data: [
+  //       {
+  //         taskId: "task4",
+  //         taskType: "test",
+  //         title: "Тестирование",
+  //         status: "ready"
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: "mod3",
+  //     title: "Модуль 3",
+  //     status: "ready",
+  //     data: [
+  //       {
+  //         taskId: "task5",
+  //         taskType: "test",
+  //         title: "Тестирование",
+  //         status: "ready",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   return (
     <MainModulesLayout>
@@ -89,7 +105,7 @@ function MainModules() {
             onButtonClick={callbacks.onButtonClick}
           >
             {module.data.map((test, index) => (
-              <MainTask key={test.taskId} data={test} number={index + 1} />
+              <MainTask link={`/task/${test.taskType}/${test.taskId}`} key={test.taskId} data={test} number={index + 1} onClick={callbacks.onTaskClick} />
             ))}
           </MainTasksLayout>
         ))}

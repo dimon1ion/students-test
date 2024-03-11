@@ -2,6 +2,8 @@ import {memo, useEffect} from "react";
 import PropTypes from 'prop-types';
 import useSelector from "@src/hooks/use-selector";
 import {useLocation, useNavigate} from "react-router-dom";
+import Spinner from "@src/components/spinner";
+import PageLayout from "@src/components/layouts/page-layout";
 
 interface IProtectedProps {
     children: React.ReactNode,
@@ -25,7 +27,7 @@ function Protected({children, redirect}: IProtectedProps) {
   }, [select.exists, select.waiting]);
 
   if (!select.exists || select.waiting){
-    return (<div>Ждём...</div>)
+    return (<PageLayout position="center"><Spinner size="large" active/></PageLayout>)
   } else {
     return children;
   }

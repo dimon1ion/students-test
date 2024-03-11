@@ -1,0 +1,40 @@
+.Menu {
+  display: flex;
+  list-style: none;
+  justify-content: flex-start;
+  padding: 20px;
+  margin: 0;
+  font-size: 18px;
+}
+
+.Menu-item {
+  display: block;
+  color: rgb(15, 28, 44);
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  position: relative;
+  margin: 0px 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.Menu-item:hover {
+  color: rgb(70, 80, 201);
+}
+
+.Menu-item_active {
+    font-weight: 700;
+}
+
+.Menu-item:first-child {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.Menu-item:last-child {
+  margin-right: 0;
+  padding-right: 0;
+}

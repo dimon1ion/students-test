@@ -40,6 +40,7 @@
 }
 
 .Avatar-name {
+    font-family: "Montserrat", sans-serif;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

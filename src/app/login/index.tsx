@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import PageLayout from "../../components/layouts/page-layout";
 import { Checkbox, Form, Input } from "antd";
 import CardLogin from "../../components/card-login";
@@ -9,6 +9,7 @@ import SideLayout from "../../components/layouts/side-layout";
 import { useLocation, useNavigate } from "react-router-dom";
 import useStore from "@src/hooks/use-store";
 import useSelector from "@src/hooks/use-selector";
+import useTitle from "@src/hooks/use-title";
 
 interface IFieldType {
   email: string;
@@ -20,22 +21,25 @@ function Login() {
   const store = useStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
+  useTitle("Вход");
   const select = useSelector(state => ({
     errorMessage: state.session.errorMessage,
   }))
 
   const callbacks = {
     onSignIn: useCallback(
-      (values: IFieldType) => {
-        console.log(values);
-        store.actions.session.signIn(values, () => {
+      async (values: IFieldType) => {
+        setLoading(true);
+        await store.actions.session.signIn(values, () => {
           // Возврат на страницу, с которой пришли
           const back = location.state?.back && location.state?.back !== location.pathname
             ? location.state?.back
             : '/';
           navigate(back);
         });
+        setLoading(false);
       },
       [navigate]
     ),
@@ -76,9 +80,9 @@ function Login() {
                 <Checkbox>Запомнить меня</Checkbox>
               </Form.Item>
             </SideLayout>
-            <Form.Item validateStatus={select.errorMessage ? "" : "error"} help={select.errorMessage}>
-              <ButtonForm htmlType="submit" size="large">
-                Войти
+            <Form.Item validateStatus={select.errorMessage ? "error" : ""} help={select.errorMessage}>
+              <ButtonForm htmlType="submit" size="large" loading={loading}>
+                {loading ? "Загрузка" : "Войти"}
               </ButtonForm>
             </Form.Item>
           </Form>

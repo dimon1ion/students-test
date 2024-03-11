@@ -1,0 +1,14 @@
+.LevelWrapper {
+    display: flex;
+    flex: 1 1 auto;
+    margin: 0px 25px;
+    height: 36px;
+    align-items: center;
+}
+
+.LevelWrapper-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: white;
+}

@@ -9,6 +9,7 @@
 }
 
 .MainTask_active {
+    text-decoration: none;
     cursor: pointer;
 }
 
@@ -42,7 +43,7 @@
 .MainTask-circle_done {
     margin: 0px;
     color: rgb(15, 28, 44);
-    font-family: "Cera CY", Helvetica, Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 14px;
     line-height: 18px;
     font-weight: normal;
@@ -56,7 +57,7 @@
 .MainTask-title {
     margin: 10px 0px 0px;
     color: rgb(15, 28, 44);
-    font-family: "Cera CY", Helvetica, Arial, sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 16px;
     line-height: 20px;
     position: relative;

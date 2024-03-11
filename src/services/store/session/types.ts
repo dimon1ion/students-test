@@ -1,3 +1,5 @@
+import { IServerResponse } from "../types";
+
 export interface ISessionInitState {
   user: Partial<ISessionUser>;
   token: string | null;
@@ -11,18 +13,12 @@ export interface ISessionSignInData {
   password: string;
 }
 
-interface ISessionResponse<T> {
-    data: T;
-    message: string;
-    status: string;
-}
-
-export type ISessionResponseSignIn = ISessionResponse<{
+export type ISessionResponseSignIn = IServerResponse<{
     access_token: string;
     user: ISessionUser;
 }>;
 
-export type ISessionResponseRemind = ISessionResponse<{
+export type ISessionResponseRemind = IServerResponse<{
   user: ISessionUser;
 }>;
 

@@ -1,0 +1,21 @@
+.ButtonBack {
+    display: flex;
+    flex-direction: column;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+}
+
+.ButtonBack-button {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: center center no-repeat white;
+    border: none;
+    border-radius: 7px;
+    outline: none;
+    transition: transform 0.2s ease 0s;
+    will-change: transform;
+    cursor: pointer;
+    padding: 0px;
+}

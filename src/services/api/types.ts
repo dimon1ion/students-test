@@ -11,4 +11,5 @@ export interface ApiResponse<T> {
 
 export type APIConfig = {
   baseUrl: string;
+  defaultHeaders: Record<string, any>;
 };

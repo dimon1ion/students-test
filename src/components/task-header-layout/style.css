@@ -1,0 +1,10 @@
+.TaskHeaderLayout {
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 72px;
+    padding: 0px 18px;
+    background-color: rgb(15, 28, 44);
+}

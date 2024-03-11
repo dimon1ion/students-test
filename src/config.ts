@@ -18,7 +18,11 @@ const config : IConfig = {
     }
   },
   api: {
-    baseUrl: ''
+    baseUrl: '',
+    defaultHeaders: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
   },
 }
 

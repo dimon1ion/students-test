@@ -1,0 +1,27 @@
+.TaskContentLayout {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    /* -webkit-box-pack: center; */
+    /* justify-content: center; */
+    /* -webkit-box-align: center; */
+    /* align-items: center; */
+    box-sizing: border-box;
+    padding: 24px 0px;
+    /* background: left top rgb(131, 58, 224); */
+    background: left top rgb(64, 58, 224);
+    overflow-y: auto;
+}
+
+.TaskContentLayout::-webkit-scrollbar {
+    width: 8px;
+}
+
+.TaskContentLayout::-webkit-scrollbar-track {
+    background: none;
+}
+
+.TaskContentLayout::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgb(232, 232, 232);
+}

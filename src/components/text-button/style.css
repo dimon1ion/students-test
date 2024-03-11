@@ -1,0 +1,33 @@
+.TextButton {
+    width: 177px;
+    height: 36px;
+    padding: 0px;
+    background-color: rgb(131, 58, 224);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    overflow: hidden;
+    transition: background-color 0.2s ease 0s;
+    backface-visibility: hidden;
+    margin-left: 18px;
+}
+
+.TextButton-text {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 100%;
+    transition: transform 0.2s ease 0s;
+    will-change: transform;
+}
+
+/* На потом */
+.TaskHeaderLayout:hover .TextButton-text {
+    transform: translate3d(0px, -100%, 0px);
+}
