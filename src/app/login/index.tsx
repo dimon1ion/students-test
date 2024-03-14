@@ -34,6 +34,8 @@ function Login() {
         setLoading(true);
         await store.actions.session.signIn(values, () => {
           // Возврат на страницу, с которой пришли
+          console.log(location.state?.back);
+          console.log(location.pathname);
           const back = location.state?.back && location.state?.back !== location.pathname
             ? location.state?.back
             : '/';

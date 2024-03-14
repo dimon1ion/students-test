@@ -1,7 +1,7 @@
+import ModalTaskResult from "@src/components/modal-task-result";
 import Spinner from "@src/components/spinner";
 import TestQuestion from "@src/components/test-question";
 import TestTemplate from "@src/components/test-template";
-import useInit from "@src/hooks/use-init";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
@@ -9,14 +9,16 @@ import {
   IQuestion,
   IQuestionAnswer,
 } from "@src/services/store/tasks/test/types";
-import { Button } from "antd";
-import { memo, useCallback, useLayoutEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Button, Modal } from "antd";
+import { memo, useCallback, useLayoutEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Test() {
   useTitle("Модуль 1 Тестирование");
   const store = useStore();
   const params = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
     store.actions.test.load(Number(params.id));
@@ -26,6 +28,7 @@ function Test() {
     questions: state.test.questions,
     answers: state.test.answers,
     waiting: state.test.waiting,
+    mark: state.test.mark,
   }));
 
   const callbacks = {
@@ -35,6 +38,15 @@ function Test() {
       },
       [store]
     ),
+    onFinish: useCallback(() => {
+      store.actions.test.finishTest(() => {
+        setIsOpen(true);
+      });
+    }, [store]),
+    onNextTask: useCallback(() => {
+      setIsOpen(false);
+      navigate("/");
+    }, [navigate]),
   };
 
   return (
@@ -49,11 +61,22 @@ function Test() {
           />
         ))}
         {select.questions.length > 0 && (
-          <Button loading={select.waiting} disabled={select.questions.length !== select.answers.length}>
+          <Button
+            loading={select.waiting}
+            disabled={select.questions.length !== select.answers.length}
+            onClick={callbacks.onFinish}
+          >
             Завершить тест
           </Button>
         )}
       </Spinner>
+      <Modal open={isOpen} footer={[]} centered>
+        <ModalTaskResult
+          text="Задание завершено"
+          mark={select.mark === null ? undefined : select.mark}
+          onNext={callbacks.onNextTask}
+        />
+      </Modal>
     </TestTemplate>
   );
 }

@@ -3,11 +3,12 @@ import { IServerResponse } from "../../types";
 export interface ITaskInitState {
   id: number | null;
   questions: IQuestion[];
-  answers: IAsnwer[];
+  answers: IAnswer[];
+  mark: number | null;
   waiting: boolean;
 }
 
-interface IAsnwer {
+interface IAnswer {
   question_id: number;
   answer_id: number;
 }
@@ -15,6 +16,12 @@ interface IAsnwer {
 export type ITaskResponseLoad = IServerResponse<{
   id: number;
   questions: IQuestion[];
+}>;
+
+export type ITaskResponseFinish = IServerResponse<{
+  student_test_id: number;
+  score: number;
+  id: number;
 }>;
 
 export interface IQuestion {

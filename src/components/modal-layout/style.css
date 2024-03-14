@@ -1,0 +1,88 @@
+body:has(.ModalLayout) {
+  overflow: hidden;
+}
+
+.ModalLayout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  /* padding: 10px; */
+  min-height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalLayout-frame {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  max-height: 90%;
+  max-width: 90%;
+  padding: 50px 80px;
+  background: rgb(255, 255, 255);
+  border-radius: 20px;
+  animation: 0.3s ease-in 0s 1 normal none running AnimModal;
+  overflow: hidden scroll;
+  scroll-behavior: smooth;
+}
+
+.ModalLayout-frame::-webkit-scrollbar {
+  width: 18px;
+}
+
+.ModalLayout-frame::-webkit-scrollbar-thumb {
+  border: 7px solid transparent;
+  border-radius: 25px;
+  background-color: rgb(239, 239, 239);
+  background-clip: padding-box;
+  min-height: 48px;
+}
+
+@keyframes AnimModal {
+  0% {
+    transform: scale(0.9, 0.9) translate(0px, 20px);
+  }
+  100% {
+    transform: scale(1, 1) translate(0px, 0px);
+  }
+}
+
+.ModalLayout-head {
+  height: 80px;
+  background: #f5f5f5;
+  display: flex;
+  /*align-items: stretch;*/
+  justify-content: space-between;
+  padding: 0 30px 0 20px;
+}
+
+.ModalLayout-close {
+  align-self: center;
+}
+
+.ModalLayout-title {
+  margin: 0;
+  padding: 20px 0 10px;
+}
+
+.ModalLayout-content {
+  min-height: 100px;
+  padding-top: 70px;
+}
+
+.ModalLayout-footer {
+  padding-bottom: 70px;
+}
+
+.ModalLayout-footer_padding {
+  background: #f5f5f5;
+  padding: 20px;
+}

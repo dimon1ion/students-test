@@ -20,7 +20,6 @@ function MainModules() {
     onButtonClick: useCallback((status?: ModuleStatus) => {},
     []),
     onTaskClick: useCallback((taskId: number | string, taskType: TaskType) => {
-      console.log(`task/${taskType}/${taskId}`);
       navigate(`task/${taskType}/${taskId}`);
     }, [navigate]),
   };

@@ -1,5 +1,5 @@
 import StoreModule from "../../module";
-import { ITaskInitState, ITaskResponseLoad } from "./types";
+import { ITaskInitState, ITaskResponseFinish, ITaskResponseLoad } from "./types";
 
 class TaskState extends StoreModule<ITaskInitState> {
   initState(): ITaskInitState {
@@ -7,6 +7,7 @@ class TaskState extends StoreModule<ITaskInitState> {
       id: null,
       questions: [],
       answers: [],
+      mark: null,
       waiting: false,
     };
   }
@@ -59,6 +60,51 @@ class TaskState extends StoreModule<ITaskInitState> {
       ...this.getState(),
       answers,
     });
+  }
+
+  async finishTest(onSuccess: () => void) {
+    if (this.getState().questions.length !== this.getState().answers.length) {
+      return;
+    }
+    this.setState(
+      {
+        ...this.getState(),
+        waiting: true,
+      },
+      "Ожидание финиша Теста"
+    );
+    const data = {
+      data: {
+        test_id: this.getState().id,
+        answers: this.getState().answers.map(answer => ({answer_id: answer.answer_id})),
+      } 
+    }
+    const res = await this.services.api.request<ITaskResponseFinish>({
+      url: `/api/v1/student/test/finish`,
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    console.log(res);
+    if (res.data.status == "success") {
+      this.setState(
+        {
+          ...this.getState(),
+          mark: res.data.data.score,
+        },
+        "Тест завершен"
+      );
+      onSuccess();
+    }
+    else {
+      
+    }
+    this.setState(
+      {
+        ...this.getState(),
+        waiting: false,
+      },
+      "Прекращение ожидания"
+    );
   }
 }
 
