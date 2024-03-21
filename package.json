@@ -14,8 +14,11 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.23.3",
     "@bem-react/classname": "^1.6.0",
+    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/modifiers": "^7.0.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
+    "antd": "^5.9.4",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.8.1",
@@ -25,8 +28,7 @@
     "react-router-dom": "^6.14.1",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "shallowequal": "^1.1.0",
-    "antd": "^5.9.4"
+    "shallowequal": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",

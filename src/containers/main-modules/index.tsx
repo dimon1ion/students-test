@@ -17,11 +17,12 @@ function MainModules() {
   }));
 
   const callbacks = {
-    onButtonClick: useCallback((status?: ModuleStatus) => {},
-    []),
-    onTaskClick: useCallback((taskId: number | string, taskType: TaskType) => {
-      navigate(`task/${taskType}/${taskId}`);
-    }, [navigate]),
+    onButtonClick: useCallback((status?: ModuleStatus) => {}, []),
+    onTaskClick: useCallback((moduleId: number | string, taskId: number | string, taskType: TaskType) => {
+        navigate(`task/${taskType}/${taskId}`);
+      },
+      [navigate]
+    ),
   };
 
   const select2: IModuleData[] = [
@@ -34,6 +35,12 @@ function MainModules() {
           taskType: "test",
           status: "during",
           title: "Тестирование",
+        },
+        {
+          taskId: "2",
+          taskType: "accordance",
+          status: "during",
+          title: "Сопоставление бактерий",
         },
       ],
     },
@@ -104,7 +111,15 @@ function MainModules() {
             onButtonClick={callbacks.onButtonClick}
           >
             {module.data.map((test, index) => (
-              <MainTask link={`/task/${test.taskType}/${test.taskId}`} key={test.taskId} data={test} number={index + 1} onClick={callbacks.onTaskClick} />
+              <MainTask
+                link={`/task/${test.taskType}/${test.taskId}`}
+                key={test.taskId}
+                data={test}
+                number={index + 1}
+                onClick={(taskId: number | string, taskType: TaskType) =>
+                  callbacks.onTaskClick(module.id, taskId, taskType)
+                }
+              />
             ))}
           </MainTasksLayout>
         ))}

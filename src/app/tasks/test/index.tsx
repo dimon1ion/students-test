@@ -2,6 +2,7 @@ import ModalTaskResult from "@src/components/modal-task-result";
 import Spinner from "@src/components/spinner";
 import TestQuestion from "@src/components/test-question";
 import TestTemplate from "@src/components/test-template";
+import TaskLayout from "@src/containers/task-layout";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
@@ -50,34 +51,36 @@ function Test() {
   };
 
   return (
-    <TestTemplate>
-      <Spinner active={select.waiting}>
-        {select.questions?.map((question, index) => (
-          <TestQuestion
-            onChooseAnswer={callbacks.onChooseAnswer}
-            question={question}
-            key={question.id}
-            number={index + 1}
+    <TaskLayout>
+      <TestTemplate>
+        <Spinner active={select.waiting}>
+          {select.questions?.map((question, index) => (
+            <TestQuestion
+              onChooseAnswer={callbacks.onChooseAnswer}
+              question={question}
+              key={question.id}
+              number={index + 1}
+            />
+          ))}
+          {select.questions.length > 0 && (
+            <Button
+              loading={select.waiting}
+              disabled={select.questions.length !== select.answers.length}
+              onClick={callbacks.onFinish}
+            >
+              Завершить тест
+            </Button>
+          )}
+        </Spinner>
+        <Modal open={isOpen} footer={[]} centered>
+          <ModalTaskResult
+            text="Задание завершено"
+            mark={select.mark === null ? undefined : select.mark}
+            onNext={callbacks.onNextTask}
           />
-        ))}
-        {select.questions.length > 0 && (
-          <Button
-            loading={select.waiting}
-            disabled={select.questions.length !== select.answers.length}
-            onClick={callbacks.onFinish}
-          >
-            Завершить тест
-          </Button>
-        )}
-      </Spinner>
-      <Modal open={isOpen} footer={[]} centered>
-        <ModalTaskResult
-          text="Задание завершено"
-          mark={select.mark === null ? undefined : select.mark}
-          onNext={callbacks.onNextTask}
-        />
-      </Modal>
-    </TestTemplate>
+        </Modal>
+      </TestTemplate>
+    </TaskLayout>
   );
 }
 

@@ -6,10 +6,14 @@ import TaskHeaderLayout from "@src/components/task-header-layout";
 import TextButton from "@src/components/text-button";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
-import { memo, useCallback } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import React, { memo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Tasks() {
+interface ITaskLayoutProps {
+    children: React.ReactNode;
+}
+
+function TaskLayout({children}: ITaskLayoutProps) {
   const store = useStore();
   const navigate = useNavigate();
 
@@ -38,10 +42,10 @@ function Tasks() {
         />
       </TaskHeaderLayout>
       <TaskContentLayout>
-        <Outlet />
+        {children}
       </TaskContentLayout>
     </PageLayout>
   );
 }
 
-export default memo(Tasks);
+export default memo(TaskLayout);

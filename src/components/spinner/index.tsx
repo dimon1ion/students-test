@@ -10,7 +10,7 @@ interface SpinnerProps {
 
 function Spinner({size, active, children}: SpinnerProps) {
   if (active) {
-    return <Spin spinning delay={500} size={size}>{children}</Spin>
+    return <Spin spinning delay={500} size={size} className="Spinner">{children}</Spin>
   } else {
     return children;
   }

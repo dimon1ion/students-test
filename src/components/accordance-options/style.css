@@ -1,0 +1,30 @@
+.AccordanceOptions {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin-right: 14px;
+    padding: 24px 10px 0px 0px;
+    border-radius: 8px;
+    box-shadow: transparent 0px 0px 0px 4px;
+    transition: box-shadow 0.4s ease 0s;
+    will-change: box-shadow;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.AccordanceOptions::-webkit-scrollbar {
+    width: 8px;
+}
+
+.AccordanceOptions::-webkit-scrollbar-track {
+    background: none;
+}
+
+.AccordanceOptions::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgb(232, 232, 232);
+}
+
+.AccordanceOptions > *:nth-child() {
+    margin-bottom: 24px;
+}

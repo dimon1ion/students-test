@@ -30,6 +30,9 @@ class APIService {
       headers: {...this.defaultHeaders, ...headers},
       ...options,
     });
+    if (res.status === 401) {
+      this.services.store.actions.session.remind();
+    }
     return {data: await res.json(), status: res.status, headers: res.headers};
   }
 

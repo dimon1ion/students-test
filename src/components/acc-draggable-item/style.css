@@ -1,0 +1,28 @@
+.AccDraggableItem {
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 5px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AccDraggableItem_dragged {
+  position: fixed;
+  opacity: 0.7;
+}
+
+.AccDraggableItem-text {
+    color: rgb(15, 28, 44);
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    white-space: pre-line;
+    word-break: break-word;
+    text-align: center;
+}
+
+.AccDraggableItem-image {
+  object-fit: contain;
+  object-position: center;
+}

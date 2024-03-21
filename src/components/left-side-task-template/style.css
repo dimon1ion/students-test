@@ -1,0 +1,11 @@
+.LeftSideTaskTemplate {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-right: 24px;
+    width: 100%;
+    max-width: 400px;
+    row-gap: 30px;
+}

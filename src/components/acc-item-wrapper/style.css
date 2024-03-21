@@ -1,0 +1,29 @@
+.AccItemWrapper {
+    width: 264px;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 5px inset, transparent 0px 0px 0px 4px;
+    /* transform: translate3d(0px, 0px, 0px); */
+    transition: box-shadow 0.4s ease 0s;
+    will-change: box-shadow;
+    /* height: calc(25% - 24px); */
+    /* height: 90px; */
+    min-height: 90px;
+    margin-bottom: 24px;
+}
+
+.AccItemWrapper_type_variant {
+    background: rgb(34, 56, 166);
+}
+
+.AccItemWrapper_type_answer {
+    background: rgb(219, 219, 219);
+}
+
+.AccItemWrapper_border {
+    border: 2px solid rgb(100, 223, 210);
+}
+
+.AccItemWrapper > * {
+    width: 264px;
+    height: 90px;
+}

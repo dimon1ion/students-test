@@ -18,7 +18,7 @@ const config : IConfig = {
     }
   },
   api: {
-    baseUrl: '',
+    baseUrl: 'http://127.0.0.1:8000',
     defaultHeaders: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',

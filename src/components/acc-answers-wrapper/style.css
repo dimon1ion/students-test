@@ -1,0 +1,22 @@
+.AccAnswersWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 8px;
+    background: rgb(255, 255, 255);
+    padding: 24px 24px 0px;
+    overflow-y: auto;
+}
+
+.AccAnswersWrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.AccAnswersWrapper::-webkit-scrollbar-track {
+    background: none;
+}
+
+.AccAnswersWrapper::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgb(189, 189, 189);
+}
