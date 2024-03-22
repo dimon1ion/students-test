@@ -5,11 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.AccDraggableItem_dragged {
-  position: fixed;
-  opacity: 0.7;
+.AccDraggableItem_isDragging {
+  /* position: absolute; */
+  opacity: 0.2;
 }
 
 .AccDraggableItem-text {
@@ -20,6 +22,7 @@
     white-space: pre-line;
     word-break: break-word;
     text-align: center;
+    user-select: none;
 }
 
 .AccDraggableItem-image {

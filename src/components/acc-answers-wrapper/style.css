@@ -4,8 +4,9 @@
     height: 100%;
     border-radius: 8px;
     background: rgb(255, 255, 255);
-    padding: 24px 24px 0px;
+    padding: 24px 24px;
     overflow-y: auto;
+    row-gap: 24px;
 }
 
 .AccAnswersWrapper::-webkit-scrollbar {

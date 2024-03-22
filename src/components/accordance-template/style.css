@@ -9,5 +9,5 @@
     -webkit-box-pack: center;
     justify-content: center;
     max-width: 92%;
-    /* min-width: 1176px; */
+    min-width: 1176px;
 }

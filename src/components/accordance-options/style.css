@@ -10,6 +10,7 @@
     will-change: box-shadow;
     overflow-y: auto;
     overflow-x: hidden;
+    row-gap: 24px;
 }
 
 .AccordanceOptions::-webkit-scrollbar {
@@ -22,7 +23,7 @@
 
 .AccordanceOptions::-webkit-scrollbar-thumb {
     border-radius: 5px;
-    background: rgb(232, 232, 232);
+    background: rgba(232, 232, 232, .1);
 }
 
 .AccordanceOptions > *:nth-child() {
