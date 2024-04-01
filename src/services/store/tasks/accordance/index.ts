@@ -15,10 +15,11 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     };
   }
 
-  async load(moduleId: number, taskId: number) {
+  async load(taskId: number) {
     this.setState(
       {
         ...this.initState(),
+        taskId,
         waitingLoad: true,
       },
       "Ожидание загрузки Соответствий"
@@ -113,7 +114,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     });
   }
 
-  async finishAccordance(onSuccess: () => void) {
+  async finishAccordance(onSuccess: () => void, taskId: number) {
     if (this.getState().result.length !== this.getState().accordances.length) {
       return;
     }
@@ -126,7 +127,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     );
     const data = {
         data: {
-          task_id: 2,
+          task_id: taskId,
           comparisons: this.getState().result.map(item => ({
             portable_id: item.portableId,
             accordance_id: item.accordanceId

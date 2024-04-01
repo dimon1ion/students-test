@@ -28,7 +28,7 @@ function Accordance() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.accordance.load(1, Number(params.id));
+    store.actions.accordance.load(Number(params.id));
   }, [store, params]);
 
   const select = useSelector((state) => ({
@@ -61,7 +61,7 @@ function Accordance() {
     onFinish: useCallback(() => {
       store.actions.accordance.finishAccordance(() => {
         setIsOpen(true);
-      });
+      }, Number(params.id));
     }, [store]),
     onNextTask: useCallback(() => {
       setIsOpen(false);
