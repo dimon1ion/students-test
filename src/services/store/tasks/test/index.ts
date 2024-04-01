@@ -9,6 +9,7 @@ class TaskState extends StoreModule<ITaskInitState> {
       answers: [],
       mark: null,
       waiting: false,
+      waitingLoad: false,
     };
   }
 
@@ -16,7 +17,7 @@ class TaskState extends StoreModule<ITaskInitState> {
     this.setState(
       {
         ...this.initState(),
-        waiting: true,
+        waitingLoad: true,
       },
       "Ожидание загрузки Теста"
     );
@@ -30,7 +31,7 @@ class TaskState extends StoreModule<ITaskInitState> {
       this.setState(
         {
           ...this.initState(),
-          waiting: false,
+          waitingLoad: false,
         },
         "Тест не загружен"
       );
@@ -39,7 +40,7 @@ class TaskState extends StoreModule<ITaskInitState> {
       ...this.getState(),
       id: res.data.data.id,
       questions: res.data.data.questions,
-      waiting: false,
+      waitingLoad: false,
     });
   }
 

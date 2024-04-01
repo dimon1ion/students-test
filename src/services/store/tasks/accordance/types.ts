@@ -1,31 +1,42 @@
 import { IServerResponse } from "../../types";
 
 export interface IAccordanceInitState {
-  image: string | null,
-  title: string,
-  parents: IParent[],
-  answers: IAnswer[],
-  result: IResult[],
-  waiting: boolean,
+  image: string | null;
+  description: string;
+  accordances: IAccordance[];
+  portables: IPortable[];
+  result: IResult[];
+  mark: number | null;
+  waiting: boolean;
+  waitingLoad: boolean;
 }
 
 export type IAccordanceResponseLoad = IServerResponse<{
-    task_description: string;
-    images: IParent[];
-    answers: IAnswer[];
-  }>;
+  description: string;
+  accordances: IAccordance[];
+  portables: IPortable[];
+}>;
 
-interface IParent {
-    id: number,
-    url: string,
+export type IAccordanceResponseFinish = IServerResponse<{
+  task_id: number;
+  score: number;
+  id: number;
+  student_profile_id: number;
+}>;
+
+interface IAccordance {
+  id: number;
+  value: string;
+  value_type: "string" | "image" | "order";
 }
 
-interface IAnswer {
-    id: number,
-    text: string,
+interface IPortable {
+  id: number;
+  value: string;
+  value_type: "string" | "image" | "order";
 }
 
 interface IResult {
-    parentId: number,
-    answerId: number,
+  accordanceId: number;
+  portableId: number;
 }

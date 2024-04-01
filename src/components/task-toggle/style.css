@@ -1,0 +1,28 @@
+.TaskToggle {
+    display: flex;
+    column-gap: 10px;
+}
+.TaskToggle-button {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(15, 28, 44);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 16px;
+    outline: none;
+    text-transform: uppercase;
+    text-wrap: wrap;
+}
+
+.TaskToggle-image {
+    width: 100%;
+    height: 100%;
+}
+
+.TaskToggle-image_rotate {
+    transform: rotate(180deg);
+}

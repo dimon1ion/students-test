@@ -1,8 +1,4 @@
-import {
-  DndContext,
-  DragEndEvent,
-  DragOverlay,
-} from "@dnd-kit/core";
+import { DndContext, DragEndEvent, DragOverlay } from "@dnd-kit/core";
 import AccAnswersItem from "@src/components/acc-answers-item";
 import AccAnswersWrapper from "@src/components/acc-answers-wrapper";
 import AccDraggableItem from "@src/components/acc-draggable-item";
@@ -11,6 +7,7 @@ import AccordanceOptions from "@src/components/accordance-options";
 import AccordanceTemplate from "@src/components/accordance-template";
 import AnswerButton from "@src/components/answer-button";
 import LeftSideTaskTemplate from "@src/components/left-side-task-template";
+import ModalTaskResult from "@src/components/modal-task-result";
 import QuestionWrapper from "@src/components/question-wrapper";
 import RightSideTaskTemplate from "@src/components/right-side-task-template";
 import Spinner from "@src/components/spinner";
@@ -18,30 +15,36 @@ import TaskLayout from "@src/containers/task-layout";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
+import { Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useMemo, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Accordance() {
   useTitle("Модуль 1 Сопоставление");
   const store = useStore();
   const [activeId, setActiveId] = useState<number | null>(null);
+  const params = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.accordance.load(1, 1);
-  }, [store]);
+    store.actions.accordance.load(1, Number(params.id));
+  }, [store, params]);
 
   const select = useSelector((state) => ({
-    title: state.accordance.title,
-    parents: state.accordance.parents,
-    answers: state.accordance.answers,
+    title: state.accordance.description,
+    accordances: state.accordance.accordances,
+    portables: state.accordance.portables,
     results: state.accordance.result,
     waiting: state.accordance.waiting,
+    mark: state.accordance.mark,
+    waitingLoad: state.accordance.waitingLoad
   }));
 
   const callbacks = {
     handleDragEnd: useCallback(
       (event: DragEndEvent) => {
         setActiveId(null);
-        console.log(event);
         store.actions.accordance.setResult(
           Number(event.active.id),
           event.over === null ? null : Number(event.over.id)
@@ -49,10 +52,21 @@ function Accordance() {
       },
       [store, setActiveId]
     ),
-    handleDragStart: useCallback((event: DragEndEvent) => {
-      console.log(event.active.id)
-      setActiveId(Number(event.active.id));
-    }, [setActiveId]),
+    handleDragStart: useCallback(
+      (event: DragEndEvent) => {
+        setActiveId(Number(event.active.id));
+      },
+      [setActiveId]
+    ),
+    onFinish: useCallback(() => {
+      store.actions.accordance.finishAccordance(() => {
+        setIsOpen(true);
+      });
+    }, [store]),
+    onNextTask: useCallback(() => {
+      setIsOpen(false);
+      navigate("/");
+    }, [navigate]),
   };
 
   const options = {
@@ -70,28 +84,28 @@ function Accordance() {
       if (activeId === null) {
         return;
       }
-      const found = select.answers?.find((item) => item.id === activeId);
+      const found = select.portables?.find((item) => item.id === activeId);
       if (!found) {
         return;
       }
       return (
         <AccDraggableItem
           id={found.id}
-          data={{ str: found.text, type: "text" }}
+          data={{ value: found.value, value_type: found.value_type }}
           show
         />
       );
-    }, [activeId, select.answers]),
+    }, [activeId, select.portables]),
   };
 
   return (
     <TaskLayout>
       <AccordanceTemplate>
-        <Spinner active={select.waiting}>
+        <Spinner active={select.waitingLoad}>
           {select.title && (
             <LeftSideTaskTemplate>
               <QuestionWrapper text={select.title} />
-              <AnswerButton text="Ответить" onClick={() => {}} />
+              <AnswerButton text="Ответить" onClick={callbacks.onFinish} loading={select.waiting} disabled={select.results.length !== select.accordances.length} />
             </LeftSideTaskTemplate>
           )}
           <DndContext
@@ -101,14 +115,14 @@ function Accordance() {
             <RightSideTaskTemplate>
               <AccordanceOptions>
                 {/* Элементы */}
-                {select.answers?.map((item) => (
+                {select.portables?.map((item) => (
                   <AccItemWrapper type="variant" key={item.id}>
                     <AccDraggableItem
                       id={item.id}
-                      data={{ str: item.text, type: "text" }}
+                      data={{ value: item.value, value_type: item.value_type }}
                       show={
                         select.results?.findIndex(
-                          (result) => result.answerId === item.id
+                          (result) => result.portableId === item.id
                         ) == -1
                       }
                     />
@@ -116,41 +130,52 @@ function Accordance() {
                 ))}
                 {/* конец */}
               </AccordanceOptions>
-              <AccAnswersWrapper>
-                {select.parents?.map((parent) => {
-                  const result = select.results?.find(
-                    (result) => result.parentId == parent.id
-                  );
-                  let item = undefined;
-                  if (result !== undefined) {
-                    item = select.answers?.find(
-                      (item) => item.id == result.answerId
+              {select.accordances?.length > 0 && (
+                <AccAnswersWrapper>
+                  {select.accordances?.map((accordance) => {
+                    const result = select.results?.find(
+                      (result) => result.accordanceId == accordance.id
                     );
-                  }
-                  let element = undefined;
-                  if (item) {
-                    element = (
-                      <AccDraggableItem
-                        id={item.id}
-                        data={{ str: item.text, type: "text" }}
-                        show
+                    let item = undefined;
+                    if (result !== undefined) {
+                      item = select.portables?.find(
+                        (item) => item.id == result.portableId
+                      );
+                    }
+                    let element = undefined;
+                    if (item) {
+                      element = (
+                        <AccDraggableItem
+                          id={item.id}
+                          data={{ value: item.value, value_type: item.value_type }}
+                          show
+                        />
+                      );
+                    }
+                    return (
+                      <AccAnswersItem
+                        parentId={accordance.id}
+                        key={accordance.id}
+                        element={element}
+                        value={accordance.value}
+                        value_type={accordance.value_type}
                       />
                     );
-                  }
-                  return (
-                    <AccAnswersItem
-                      parentId={parent.id}
-                      key={parent.id}
-                      element={element}
-                      url={parent.url}
-                    />
-                  );
-                })}
-              </AccAnswersWrapper>
-            <DragOverlay>{options.activeOverlay}</DragOverlay>
+                  })}
+                </AccAnswersWrapper>
+              )}
+
+              <DragOverlay>{options.activeOverlay}</DragOverlay>
             </RightSideTaskTemplate>
           </DndContext>
         </Spinner>
+        <Modal open={isOpen} footer={[]} centered closable={false}>
+          <ModalTaskResult
+            text="Задание завершено"
+            mark={select.mark === null ? undefined : select.mark}
+            onNext={callbacks.onNextTask}
+          />
+        </Modal>
       </AccordanceTemplate>
     </TaskLayout>
   );

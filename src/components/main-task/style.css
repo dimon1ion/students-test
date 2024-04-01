@@ -6,10 +6,12 @@
     padding: 16px 0px;
     width: 164px;
     color: rgb(15, 28, 44);
+    text-decoration: none;
+    cursor: no-drop;
 }
 
 .MainTask_active {
-    text-decoration: none;
+    /* text-decoration: none; */
     cursor: pointer;
 }
 
@@ -40,7 +42,7 @@
     background-color: rgb(60, 71, 208);
 }
 
-.MainTask-circle_done {
+.MainTask-finishedIcon {
     margin: 0px;
     color: rgb(15, 28, 44);
     font-family: "Montserrat", sans-serif;
@@ -50,8 +52,8 @@
     position: absolute;
     top: -1px;
     right: -4px;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 
 .MainTask-title {

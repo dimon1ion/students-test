@@ -1,0 +1,19 @@
+.TestTextAnswers {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 100%;
+    padding-top: 14px;
+}
+
+.TestTextAnswers_type_string {
+    row-gap: 24px;
+}
+
+.TestTextAnswers_type_image {
+    display: grid;
+    gap: 24px;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-template-rows: repeat(2, 1fr); */
+}

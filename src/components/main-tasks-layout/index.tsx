@@ -1,25 +1,27 @@
 import React, { memo, useMemo } from "react";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
-import { Button } from "antd";
+import { Button, ButtonProps } from "antd";
 import { ModuleStatus } from "@src/types";
 
 export interface IMainTasksLayoutProps {
   title: string;
-  status?: ModuleStatus;
+  status: ModuleStatus;
   children: React.ReactNode;
-  onButtonClick?: (status?: ModuleStatus) => void;
+  loading: boolean;
+  onButtonClick?: () => void;
 }
 function MainTasksLayout({onButtonClick = () => {}, ...props}: IMainTasksLayoutProps) {
   const cn = bem("MainTasksLayout");
 
   const render = {
     button: useMemo(() => {
+      const params: ButtonProps = {loading: props.loading, onClick: () => onButtonClick()};
       switch (props.status) {
-        case "ready":
-          return <Button type={"primary"} onClick={() => onButtonClick(props.status)}>Начать тест</Button>;
-        case "started":
-          return <Button danger type={"default"} onClick={() => onButtonClick(props.status)}>Завершить тест</Button>
+        case "не начат":
+          return <Button type={"primary"} {...params}>Начать тест</Button>;
+        case "начат":
+          return <Button danger type={"default"} {...params}>Завершить тест</Button>
         default:
           return <></>
       }

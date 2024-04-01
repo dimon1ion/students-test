@@ -1,20 +1,19 @@
 import { IServerResponse } from "../../types";
 
-export interface ITaskInitState {
-  id: number | null;
+export interface IMultipleTestInitState {
+  taskId: number | null;
   questions: IQuestion[];
   answers: IAnswer[];
+  activeQuestion: {
+    question: IQuestion;
+    index: number;
+  } | null;
   mark: number | null;
   waiting: boolean;
   waitingLoad: boolean;
 }
 
-interface IAnswer {
-  question_id: number;
-  answer_id: number;
-}
-
-export type ITaskResponseLoad = IServerResponse<{
+export type IMultipleTestResponseLoad = IServerResponse<{
   id: number;
   questions: IQuestion[];
 }>;
@@ -27,13 +26,21 @@ export type ITaskResponseFinish = IServerResponse<{
 
 export interface IQuestion {
   id: number;
-  question_text: string;
+  text: string;
+  image: string | undefined;
+  answerType: "image" | "string";
   test_id: number;
   answers: IQuestionAnswer[];
+  multiple: boolean;
 }
 
 export interface IQuestionAnswer {
   id: number;
-  answer_text: string;
+  text: string;
   question_id: number;
+}
+
+export interface IAnswer {
+  question_id: number;
+  answersIds: number[];
 }

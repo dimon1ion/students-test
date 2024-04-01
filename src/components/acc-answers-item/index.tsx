@@ -6,14 +6,15 @@ import AccParentItem from "../acc-parent-item";
 interface IAccAnswersItemProps {
   parentId: number;
   element?: React.ReactNode
-  url: string;
+  value: string;
+  value_type: "order" | "string" | "image";
 }
 
 function AccAnswersItem(props: IAccAnswersItemProps) {
   return (
     <div className="AccAnswersItem">
       <AccDroppableItem id={props.parentId} element={props.element} />
-      <AccParentItem str={props.url}/>
+      <AccParentItem value={props.value} value_type={props.value_type}/>
     </div>
   );
 }

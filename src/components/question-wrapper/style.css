@@ -20,3 +20,30 @@
     white-space: pre-line;
     word-break: break-word;
 }
+
+.QuestionWrapper-imageBlock {
+    /* min-height: 145px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    max-height: 180px; */
+    display: flex;
+    justify-content: center;
+}
+
+.QuestionWrapper-image {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    user-select: none;
+    object-fit: contain;
+    min-height: 145px;
+    border-bottom: 1px solid rgb(219, 219, 219);
+    max-height: 200px;
+}
+
+.QuestionWrapper-imageMask {
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    border-radius: 10px;
+}

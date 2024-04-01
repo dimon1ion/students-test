@@ -2,49 +2,69 @@ import MainTasksLayout from "@src/components/main-tasks-layout";
 import MainTask from "@src/components/main-task";
 import Spinner from "@src/components/spinner";
 import useSelector from "@src/hooks/use-selector";
-import { IModuleData } from "@src/services/store/main/types";
-import { memo, useCallback } from "react";
+import { IModule } from "@src/services/store/main/types";
+import { memo, useCallback, useLayoutEffect } from "react";
 import MainModulesLayout from "@src/components/main-modules-layout";
 import { useNavigate } from "react-router-dom";
 import { ModuleStatus, TaskType } from "@src/types";
+import useStore from "@src/hooks/use-store";
 
 function MainModules() {
   const navigate = useNavigate();
+  const store = useStore();
+
+  useLayoutEffect(() => {
+    store.actions.main.load();
+  }, [store]);
 
   const select = useSelector((state) => ({
-    modules: state.main.list,
+    modules: state.main.modules,
     waiting: state.main.waiting,
   }));
 
   const callbacks = {
-    onButtonClick: useCallback((status?: ModuleStatus) => {}, []),
-    onTaskClick: useCallback((moduleId: number | string, taskId: number | string, taskType: TaskType) => {
+    onButtonClick: useCallback((moduleId: IModule["id"]) => {
+      store.actions.main.changeModuleStatus(moduleId)
+    }, [store]),
+    onTaskClick: useCallback((taskId: number | string, taskType: TaskType) => {
         navigate(`task/${taskType}/${taskId}`);
       },
       [navigate]
     ),
   };
 
-  const select2: IModuleData[] = [
-    {
-      id: "mod1",
-      title: "Модуль 1",
-      data: [
-        {
-          taskId: "1",
-          taskType: "test",
-          status: "during",
-          title: "Тестирование",
-        },
-        {
-          taskId: "2",
-          taskType: "accordance",
-          status: "during",
-          title: "Сопоставление бактерий",
-        },
-      ],
-    },
-  ];
+  // const select2: IModule[] = [
+  //   {
+  //     id: "mod1",
+  //     title: "Модуль 1",
+  //     data: [
+  //       {
+  //         taskId: "1",
+  //         taskType: "test",
+  //         status: "during",
+  //         title: "Тестирование",
+  //       },
+  //       {
+  //         taskId: "1",
+  //         taskType: "accordance",
+  //         status: "during",
+  //         title: "Сопоставление бактерий",
+  //       },
+  //       {
+  //         taskId: "2",
+  //         taskType: "accordance",
+  //         status: "during",
+  //         title: "Бактерии 2",
+  //       },
+  //       {
+  //         taskId: "3",
+  //         taskType: "test2",
+  //         status: "during",
+  //         title: "Тест с множественной выборкой",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   // const select2: IModuleData[] = [
   //   {
@@ -103,22 +123,21 @@ function MainModules() {
   return (
     <MainModulesLayout>
       <Spinner active={select.waiting}>
-        {select2.map((module) => (
+        {select.modules.map((module) => (
           <MainTasksLayout
             key={module.id}
-            title={module.title}
+            title={module.name}
             status={module.status}
-            onButtonClick={callbacks.onButtonClick}
+            loading={select.waiting}
+            onButtonClick={() => callbacks.onButtonClick(module.id)}
           >
-            {module.data.map((test, index) => (
+            {module.tasks.map((task, index) => (
               <MainTask
-                link={`/task/${test.taskType}/${test.taskId}`}
-                key={test.taskId}
-                data={test}
+                link={`/task/${task.type}/${task.id}`}
+                key={task.id}
+                data={task}
                 number={index + 1}
-                onClick={(taskId: number | string, taskType: TaskType) =>
-                  callbacks.onTaskClick(module.id, taskId, taskType)
-                }
+                onClick={callbacks.onTaskClick}
               />
             ))}
           </MainTasksLayout>

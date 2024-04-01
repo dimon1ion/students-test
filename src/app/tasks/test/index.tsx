@@ -29,6 +29,7 @@ function Test() {
     questions: state.test.questions,
     answers: state.test.answers,
     waiting: state.test.waiting,
+    waitingLoad: state.test.waitingLoad,
     mark: state.test.mark,
   }));
 
@@ -53,7 +54,7 @@ function Test() {
   return (
     <TaskLayout>
       <TestTemplate>
-        <Spinner active={select.waiting}>
+        <Spinner active={select.waitingLoad}>
           {select.questions?.map((question, index) => (
             <TestQuestion
               onChooseAnswer={callbacks.onChooseAnswer}
@@ -72,7 +73,7 @@ function Test() {
             </Button>
           )}
         </Spinner>
-        <Modal open={isOpen} footer={[]} centered>
+        <Modal open={isOpen} footer={[]} centered closable={false}>
           <ModalTaskResult
             text="Задание завершено"
             mark={select.mark === null ? undefined : select.mark}

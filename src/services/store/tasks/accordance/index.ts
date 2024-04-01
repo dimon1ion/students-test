@@ -1,15 +1,17 @@
 import StoreModule from "../../module";
-import { IAccordanceInitState, IAccordanceResponseLoad } from "./types";
+import { IAccordanceInitState, IAccordanceResponseFinish, IAccordanceResponseLoad } from "./types";
 
 class AccordanceState extends StoreModule<IAccordanceInitState> {
   initState(): IAccordanceInitState {
     return {
-      title: "",
+      description: "",
       image: null,
-      answers: [],
-      parents: [],
+      portables: [],
+      accordances: [],
       result: [],
+      mark: null,
       waiting: false,
+      waitingLoad: false,
     };
   }
 
@@ -17,13 +19,13 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     this.setState(
       {
         ...this.initState(),
-        waiting: true,
+        waitingLoad: true,
       },
       "Ожидание загрузки Соответствий"
     );
 
     const res = await this.services.api.request<IAccordanceResponseLoad>({
-      url: `/api/v1/student/task/${moduleId}/${taskId}`,
+      url: `/api/v1/student/task/accordance/${taskId}`,
     });
     console.log(res);
 
@@ -31,20 +33,38 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
       this.setState(
         {
           ...this.initState(),
-          waiting: false,
+          waitingLoad: false,
         },
         "Соответствия не загружены"
       );
+      return;
+    }
+    let isOrdered = false;
+    const accordances = res.data.data.accordances.map(value => {
+      if (value.value_type == "image") {
+        value.value = this.services.api.config.baseUrl + value.value;
+      } else if (value.value_type === "order") {
+        isOrdered = true;
+      }
+      return value;
+    });
+    const portables = res.data.data.portables.map(value => {
+      if (value.value_type == "image") {
+        value.value = this.services.api.config.baseUrl + value.value;
+      }
+      return value;
+    });
+    if (isOrdered) {
+      accordances.sort((a, b) => {
+        return +a.value - +b.value
+      });
     }
     this.setState({
       ...this.getState(),
-      title: res.data.data.task_description,
-      answers: res.data.data.answers,
-      parents: res.data.data.images.map(value => {
-        value.url = this.services.api.config.baseUrl + value.url;
-        return value;
-      }),
-      waiting: false,
+      description: res.data.data.description,
+      portables,
+      accordances,
+      waitingLoad: false,
     });
   }
 
@@ -52,10 +72,10 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     let foundParentIndex = -1;
     let foundAnswerIndex = -1;
     const results = this.getState().result.map((result, index) => {
-      if (result.parentId === parentId) {
+      if (result.accordanceId === parentId) {
         foundParentIndex = index;
       }
-      if (result.answerId === answerId) {
+      if (result.portableId === answerId) {
         foundAnswerIndex = index;
       }
       return result;
@@ -73,19 +93,19 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
         }
     } else if (foundParentIndex != -1) {
       if (foundAnswerIndex != -1) {
-        let answerParent = results[foundAnswerIndex].parentId;
-        let anotherAnswer = results[foundParentIndex].answerId;
+        let answerParent = results[foundAnswerIndex].accordanceId;
+        let anotherAnswer = results[foundParentIndex].portableId;
         results[foundAnswerIndex] = {
-          answerId: anotherAnswer,
-          parentId: answerParent,
+          portableId: anotherAnswer,
+          accordanceId: answerParent,
         };
       }
-      results[foundParentIndex] = { parentId, answerId };
+      results[foundParentIndex] = { accordanceId: parentId, portableId: answerId };
     } else {
       if (foundAnswerIndex != -1) {
         results.splice(foundAnswerIndex, 1);
       }
-      results.push({ parentId, answerId });
+      results.push({ accordanceId: parentId, portableId: answerId });
     }
     this.setState({
       ...this.getState(),
@@ -93,7 +113,53 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     });
   }
 
-  async finishAccordance(onSuccess: () => void) {}
+  async finishAccordance(onSuccess: () => void) {
+    if (this.getState().result.length !== this.getState().accordances.length) {
+      return;
+    }
+    this.setState(
+      {
+        ...this.getState(),
+        waiting: true,
+      },
+      "Ожидание финиша Соответствия"
+    );
+    const data = {
+        data: {
+          task_id: 2,
+          comparisons: this.getState().result.map(item => ({
+            portable_id: item.portableId,
+            accordance_id: item.accordanceId
+          }))
+        }
+    }
+    const res = await this.services.api.request<IAccordanceResponseFinish>({
+      url: `/api/v1/student/task/accordance/finish`,
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    console.log(res);
+    if (res.data.status == "success") {
+      this.setState(
+        {
+          ...this.getState(),
+          mark: res.data.data.score,
+        },
+        "Соответствие завершено"
+      );
+      onSuccess();
+    }
+    else {
+      
+    }
+    this.setState(
+      {
+        ...this.getState(),
+        waiting: false,
+      },
+      "Прекращение ожидания"
+    );
+  }
 }
 
 export default AccordanceState;

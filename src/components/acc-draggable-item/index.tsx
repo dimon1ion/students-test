@@ -7,8 +7,8 @@ interface IAccItemProps {
   id: number;
   show: boolean;
   data: {
-    type: "image" | "text";
-    str: string;
+    value_type: "image" | "string" | "order";
+    value: string;
   }
 }
 
@@ -29,26 +29,15 @@ function AccDraggableItem(props: IAccItemProps) {
   });
   
 
-  // const style = transform
-  //   ? {
-  //       transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-  //     }
-  //   : undefined;
-  //   console.log(transform);
-
   return (
     <div
       ref={setNodeRef}
       {...listeners}
       {...attributes}
       className={cn({isDragging})}
-      // style={style}
-      // onMouseDown={callbacks.onMouse}
-      // onClick={() => console.log(coord)}
     >
-      {props.data.type === "image" && <img className={cn("image")} src={props.data.str}/>}
-      {props.data.type === "text" && <div className={cn("text")}>{props.data.str}</div>}
-      
+      {props.data.value_type === "image" && <img className={cn("image")} src={props.data.value}/>}
+      {props.data.value_type === "string" && <div className={cn("text")}>{props.data.value}</div>}
     </div>
   );
 }

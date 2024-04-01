@@ -1,20 +1,29 @@
 import { ModuleStatus, TaskStatus, TaskType } from "@src/types";
+import { IServerResponse } from "../types";
 
 export interface IMainInitState {
-  list: IModuleData[];
+  modules: IModule[];
   waiting: boolean;
 }
 
-export interface IModuleData {
-  id: string | number; //id Модуля, я пока не знаю какого типа у тебя будут ID
-  title: string; //название Модуля
-  data: IModuleTask[]; //все задания этого модуля
-  status?: ModuleStatus; //статус модуля
-}
+export type IMainResponseLoad = IServerResponse<IModule[]>;
+export type IMainStartModuleResponseLoad = IServerResponse<{}>;
 
 export interface IModuleTask {
-  taskId: string | number; //id Задания
-  title: string; //Название задания
-  taskType: TaskType; //Тип задания для адресации на шаблон
-  status: TaskStatus; // Статус задания
+  id: number;
+  module_id: number;
+  number: number;
+  type: TaskType;
+  description: string;
+  image: null;
+  status: TaskStatus;
+}
+
+export interface IModule {
+  id: number;
+  name: string;
+  task_number: number;
+  description: string | null;
+  status: ModuleStatus;
+  tasks: IModuleTask[];
 }

@@ -15,7 +15,7 @@ function AnswerButton({
   ...props
 }: IAnswerButtonProps) {
   return (
-    <Button className={"AnswerButton"} type="primary" loading={loading} disabled={disabled}>
+    <Button className={"AnswerButton"} type="primary" loading={loading} disabled={disabled} onClick={props.onClick}>
       {props.text}
     </Button>
   );

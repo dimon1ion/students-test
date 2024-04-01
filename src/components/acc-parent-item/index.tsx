@@ -1,15 +1,19 @@
-import React, { memo } from "react";
+import { memo } from "react";
 import "./style.css";
 
 interface IAccParentItemProps {
-  str: string,
+  value: string,
+  value_type: "order" | "string" | "image";
 }
 
 function AccParentItem(props: IAccParentItemProps) {
-  console.log(props.str);
+  if (props.value_type === "order") {
+    return;
+  }
   return (
     <div className="AccParentItem">
-      <img className={"AccParentItem-image"} src={props.str}/>
+      {props.value_type === "image" && <img className={"AccParentItem-image"} src={props.value}/>}
+      {props.value_type === "string" && <div className={"AccParentItem-text"}>{props.value}</div>}
     </div>
   );
 }

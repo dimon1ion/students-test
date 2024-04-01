@@ -17,7 +17,7 @@ export interface IConfig {
 }
 
 export type StoreConfigModulesKeys = keyof ConfigStoreModules;
-export type ModuleStatus = "started" | "ready";
-export type TaskType = "test" | "accordance";
-export type TaskStatus = "during" | "done" | "ready"; 
+export type ModuleStatus = "не начат" | "начат";
+export type TaskType = "finalTest" | "accordance" | "test";
+export type TaskStatus = "не активено" | "активно" | "закончено"; 
 
