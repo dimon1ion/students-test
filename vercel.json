@@ -7,12 +7,7 @@
     {
       "source": "/storage/(.*)",
       "destination": "http://senspulv.beget.tech/storage/$1"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/[^.]+",
-      "dest": "/"
-    }
+    },
+    {"source": "/(.*)", "destination": "/"}
   ]
 }
