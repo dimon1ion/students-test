@@ -53,7 +53,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> implements I
     const questions = res.data.data.questions.map(question => {
       question.multiple = Boolean(question.multiple);
       if (question.image) {
-        question.image = this.services.api.config.baseUrl + question.image;
+        question.image = this.services.api.config.imageBaseUrl + question.image;
       }
       return question;
     });

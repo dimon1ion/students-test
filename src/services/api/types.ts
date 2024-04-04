@@ -11,6 +11,7 @@ export interface ApiResponse<T> {
 }
 
 export type APIConfig = {
+  imageBaseUrl: string;
   baseUrl: string;
   defaultHeaders: Record<string, any>;
 };

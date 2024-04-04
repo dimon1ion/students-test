@@ -44,7 +44,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> implements ITask
     let isOrdered = false;
     const accordances = res.data.data.accordances.map(value => {
       if (value.value_type == "image") {
-        value.value = this.services.api.config.baseUrl + value.value;
+        value.value = this.services.api.config.imageBaseUrl + value.value;
       } else if (value.value_type === "order") {
         isOrdered = true;
       }
@@ -52,7 +52,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> implements ITask
     });
     const portables = res.data.data.portables.map(value => {
       if (value.value_type == "image") {
-        value.value = this.services.api.config.baseUrl + value.value;
+        value.value = this.services.api.config.imageBaseUrl + value.value;
       }
       return value;
     });
