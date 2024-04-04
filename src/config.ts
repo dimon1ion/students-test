@@ -18,7 +18,7 @@ const config : IConfig = {
     }
   },
   api: {
-    baseUrl: 'http://127.0.0.1:8000',
+    baseUrl: 'http://senspulv.beget.tech',
     defaultHeaders: {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
