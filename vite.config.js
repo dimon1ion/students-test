@@ -13,10 +13,15 @@ export default defineConfig({
     port: 8010,
     proxy: {
       "/api/v1": {
-        target: "http://senspulv.beget.tech",
+        target: "http://127.0.0.1:8000",
         secure: false,
         changeOrigin: true,
       },
+      "/storage": {
+        target: "http://127.0.0.1:8000",
+        secure: false,
+        changeOrigin: true,
+      }
     },
   },
   plugins: [viteReact()],

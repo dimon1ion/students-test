@@ -18,7 +18,7 @@ const config : IConfig = {
     }
   },
   api: {
-    imageBaseUrl: 'http://senspulv.beget.tech',
+    imageBaseUrl: '',
     baseUrl: '',
     defaultHeaders: {
       'Content-Type': 'application/json',
