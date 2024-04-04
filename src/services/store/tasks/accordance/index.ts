@@ -1,7 +1,8 @@
 import StoreModule from "../../module";
+import { ITaskState } from "../../types";
 import { IAccordanceInitState, IAccordanceResponseFinish, IAccordanceResponseLoad } from "./types";
 
-class AccordanceState extends StoreModule<IAccordanceInitState> {
+class AccordanceState extends StoreModule<IAccordanceInitState> implements ITaskState {
   initState(): IAccordanceInitState {
     return {
       description: "",
@@ -15,11 +16,10 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     };
   }
 
-  async load(taskId: number) {
+  async load(taskId: number, onError: (taskType?: string) => void) {
     this.setState(
       {
         ...this.initState(),
-        taskId,
         waitingLoad: true,
       },
       "Ожидание загрузки Соответствий"
@@ -30,7 +30,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
     });
     console.log(res);
 
-    if (res.status !== 200) {
+    if (!res.ok) {
       this.setState(
         {
           ...this.initState(),
@@ -38,6 +38,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> {
         },
         "Соответствия не загружены"
       );
+      onError();
       return;
     }
     let isOrdered = false;

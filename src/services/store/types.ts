@@ -37,3 +37,7 @@ export interface IServerResponse<T> {
     message: string;
     status: string;
 }
+
+export interface ITaskState {
+    load: (taskId: number, onError: (taskType?: string) => void) => void
+}

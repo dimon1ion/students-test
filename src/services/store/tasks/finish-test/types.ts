@@ -1,7 +1,7 @@
 import { IServerResponse } from "../../types";
 
-export interface ITaskInitState {
-  id: number | null;
+export interface IFinishTestInitState {
+  taskId: number | null;
   questions: IQuestion[];
   answers: IAnswer[];
   mark: number | null;
@@ -14,12 +14,13 @@ interface IAnswer {
   answer_id: number;
 }
 
-export type ITaskResponseLoad = IServerResponse<{
+export type IFinishTestResponseLoad = IServerResponse<{
   id: number;
+  task_id: number;
   questions: IQuestion[];
 }>;
 
-export type ITaskResponseFinish = IServerResponse<{
+export type IFinishTestResponseFinish = IServerResponse<{
   student_test_id: number;
   score: number;
   id: number;

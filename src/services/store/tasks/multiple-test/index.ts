@@ -1,7 +1,8 @@
 import StoreModule from "../../module";
+import { ITaskState } from "../../types";
 import { IMultipleTestInitState, IMultipleTestResponseLoad, IQuestion, IQuestionAnswer, ITaskResponseFinish } from "./types";
 
-class MultipleTestState extends StoreModule<IMultipleTestInitState> {
+class MultipleTestState extends StoreModule<IMultipleTestInitState> implements ITaskState {
   initState(): IMultipleTestInitState {
     return {
       taskId: null,
@@ -14,7 +15,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> {
     };
   }
 
-  async load(test_id: number) {
+  async load(test_id: number, onError: (taskType?: string) => void) {
     this.setState(
       {
         ...this.initState(),
@@ -29,7 +30,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> {
     });
     console.log(res);
 
-    if (res.status !== 200) {
+    if (!res.ok) {
       this.setState(
         {
           ...this.initState(),
@@ -37,6 +38,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> {
         },
         "Тест не загружен"
       );
+      onError();
       return;
     } else if(res.data.data.questions.length === 0) {
       this.setState(

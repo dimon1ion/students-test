@@ -1,0 +1,44 @@
+.ResultUserInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border: none;
+}
+
+.ResultUserInfo-title {
+    margin: 0px;
+    color: rgb(15, 28, 44);
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 40px;
+}
+
+.ResultUserInfo-stats {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 40px;
+}
+
+.ResultUserInfo-statsNumber {
+    color: rgb(15, 28, 44);
+    font-size: 44px;
+    line-height: 51px;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.ResultUserInfo-statsInfo {
+    display: flex;
+    align-items: center;
+    color: rgb(15, 28, 44);
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    row-gap: 2px;
+}
+
+.ResultUserInfo-statsImage {
+    width: 17px;
+    height: 17px;
+}

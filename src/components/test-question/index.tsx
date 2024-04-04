@@ -4,7 +4,7 @@ import "./style.css";
 import {
   IQuestion,
   IQuestionAnswer,
-} from "@src/services/store/tasks/test/types";
+} from "@src/services/store/tasks/finish-test/types";
 import { Radio, RadioChangeEvent, Space } from "antd";
 
 interface TestQuestionProps {

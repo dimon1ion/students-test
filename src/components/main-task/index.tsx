@@ -19,8 +19,8 @@ function MainTask(props: IMainTaskProps) {
     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       if (props.data.status === "активно") {
+        props.onClick(props.data.id, props.data.type)
       }
-      props.onClick(props.data.id, props.data.type)
     }
   }
 

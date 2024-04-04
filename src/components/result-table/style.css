@@ -1,0 +1,8 @@
+.ResultTable thead.ant-table-thead > tr:first-child th {
+    background-color: #3c49bf;
+    color: #fff;
+  }
+
+.ResultTable-row:nth-child(2n) {
+    background-color: rgba(60, 73, 191, 0.1);
+}

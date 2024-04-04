@@ -29,7 +29,9 @@ function Test2() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.multiTest.load(Number(params.id));
+    store.actions.multiTest.load(Number(params.id), () => {
+      navigate("/");
+    });
   }, [store, params]);
 
   const select = useSelector((state) => ({

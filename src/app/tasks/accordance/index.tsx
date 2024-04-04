@@ -17,7 +17,7 @@ import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
 import { Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useMemo, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function Accordance() {
   useTitle("Модуль 1 Сопоставление");
@@ -28,7 +28,9 @@ function Accordance() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.accordance.load(Number(params.id));
+    store.actions.accordance.load(Number(params.id), () => {
+      navigate("/*", {replace: true});
+    });
   }, [store, params]);
 
   const select = useSelector((state) => ({

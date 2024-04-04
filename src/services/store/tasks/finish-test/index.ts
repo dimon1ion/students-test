@@ -1,10 +1,11 @@
 import StoreModule from "../../module";
-import { ITaskInitState, ITaskResponseFinish, ITaskResponseLoad } from "./types";
+import { ITaskState } from "../../types";
+import { IFinishTestInitState, IFinishTestResponseFinish, IFinishTestResponseLoad } from "./types";
 
-class TaskState extends StoreModule<ITaskInitState> {
-  initState(): ITaskInitState {
+class FinishTest extends StoreModule<IFinishTestInitState> implements ITaskState {
+  initState(): IFinishTestInitState {
     return {
-      id: null,
+      taskId: null,
       questions: [],
       answers: [],
       mark: null,
@@ -13,7 +14,7 @@ class TaskState extends StoreModule<ITaskInitState> {
     };
   }
 
-  async load(test_id: number) {
+  async load(taskId: number, onError: (taskType?: string) => void) {
     this.setState(
       {
         ...this.initState(),
@@ -22,12 +23,12 @@ class TaskState extends StoreModule<ITaskInitState> {
       "Ожидание загрузки Теста"
     );
 
-    const res = await this.services.api.request<ITaskResponseLoad>({
-      url: `/api/v1/student/test/${test_id}`,
+    const res = await this.services.api.request<IFinishTestResponseLoad>({
+      url: `/api/v1/student/task/finish_test/${taskId}`,
     });
     console.log(res);
 
-    if (res.status !== 200) {
+    if (!res.ok) {
       this.setState(
         {
           ...this.initState(),
@@ -35,10 +36,12 @@ class TaskState extends StoreModule<ITaskInitState> {
         },
         "Тест не загружен"
       );
+      onError();
+      return;
     }
     this.setState({
       ...this.getState(),
-      id: res.data.data.id,
+      taskId: res.data.data.task_id,
       questions: res.data.data.questions,
       waitingLoad: false,
     });
@@ -76,17 +79,17 @@ class TaskState extends StoreModule<ITaskInitState> {
     );
     const data = {
       data: {
-        test_id: this.getState().id,
+        task_id: this.getState().taskId,
         answers: this.getState().answers.map(answer => ({answer_id: answer.answer_id})),
-      } 
+      }
     }
-    const res = await this.services.api.request<ITaskResponseFinish>({
-      url: `/api/v1/student/test/finish`,
+    const res = await this.services.api.request<IFinishTestResponseFinish>({
+      url: `/api/v1/student/task/finish_test/finish`,
       method: "POST",
       body: JSON.stringify(data)
     });
     console.log(res);
-    if (res.data.status == "success") {
+    if (res.ok) {
       this.setState(
         {
           ...this.getState(),
@@ -109,4 +112,4 @@ class TaskState extends StoreModule<ITaskInitState> {
   }
 }
 
-export default TaskState;
+export default FinishTest;

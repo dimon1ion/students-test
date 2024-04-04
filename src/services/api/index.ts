@@ -33,7 +33,7 @@ class APIService {
     if (res.status === 401) {
       this.services.store.actions.session.remind();
     }
-    return {data: await res.json(), status: res.status, headers: res.headers};
+    return {data: await res.json(), status: res.status, headers: res.headers, ok: res.ok};
   }
 
   /**

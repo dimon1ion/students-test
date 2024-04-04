@@ -9,7 +9,7 @@ import useTitle from "@src/hooks/use-title";
 import {
   IQuestion,
   IQuestionAnswer,
-} from "@src/services/store/tasks/test/types";
+} from "@src/services/store/tasks/finish-test/types";
 import { Button, Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -22,26 +22,28 @@ function Test() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.test.load(Number(params.id));
+    store.actions.finishTest.load(Number(params.id), () => {
+      navigate("/");
+    });
   }, [store, params]);
 
   const select = useSelector((state) => ({
-    questions: state.test.questions,
-    answers: state.test.answers,
-    waiting: state.test.waiting,
-    waitingLoad: state.test.waitingLoad,
-    mark: state.test.mark,
+    questions: state.finishTest.questions,
+    answers: state.finishTest.answers,
+    waiting: state.finishTest.waiting,
+    waitingLoad: state.finishTest.waitingLoad,
+    mark: state.finishTest.mark,
   }));
 
   const callbacks = {
     onChooseAnswer: useCallback(
       (question_id: IQuestion["id"], answer_id: IQuestionAnswer["id"]) => {
-        store.actions.test.setAnswer(question_id, answer_id);
+        store.actions.finishTest.setAnswer(question_id, answer_id);
       },
       [store]
     ),
     onFinish: useCallback(() => {
-      store.actions.test.finishTest(() => {
+      store.actions.finishTest.finishTest(() => {
         setIsOpen(true);
       });
     }, [store]),
