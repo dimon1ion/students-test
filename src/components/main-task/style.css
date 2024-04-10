@@ -7,7 +7,7 @@
     width: 164px;
     color: rgb(15, 28, 44);
     text-decoration: none;
-    cursor: no-drop;
+    cursor: default;
 }
 
 .MainTask_active {

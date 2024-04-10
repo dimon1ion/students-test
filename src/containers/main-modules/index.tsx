@@ -23,8 +23,8 @@ function MainModules() {
   }));
 
   const callbacks = {
-    onButtonClick: useCallback((moduleId: IModule["id"]) => {
-      store.actions.main.changeModuleStatus(moduleId)
+    onButtonClick: useCallback(async (moduleId: IModule["id"]) => {
+      await store.actions.main.changeModuleStatus(moduleId)
     }, [store]),
     onTaskClick: useCallback((taskId: number | string, taskType: TaskType) => {
         navigate(`task/${taskType}/${taskId}`);

@@ -26,7 +26,7 @@ function MainTask(props: IMainTaskProps) {
 
   return (
     <a
-      href={props.link}
+      href={props.data.status == "активно" ? props.link : undefined}
       className={cn({ active: props.data.status == "активно" })}
       onClick={callbacks.onClick}
     >

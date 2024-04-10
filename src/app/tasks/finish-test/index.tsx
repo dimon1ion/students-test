@@ -15,7 +15,6 @@ import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function Test() {
-  useTitle("Модуль 1 Тестирование");
   const store = useStore();
   const params = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -34,6 +33,7 @@ function Test() {
     waitingLoad: state.finishTest.waitingLoad,
     mark: state.finishTest.mark,
   }));
+  useTitle("Финальный тест модуля");
 
   const callbacks = {
     onChooseAnswer: useCallback(
@@ -54,7 +54,7 @@ function Test() {
   };
 
   return (
-    <TaskLayout>
+    <TaskLayout title="Финальный тест модуля">
       <TestTemplate>
         <Spinner active={select.waitingLoad}>
           {select.questions?.map((question, index) => (

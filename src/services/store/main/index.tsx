@@ -9,10 +9,11 @@ class MainState extends StoreModule<IMainInitState> {
     };
   }
 
-  async load() {
+  async load(clear: boolean = true) {
+    const state = clear ? this.initState() : this.getState();
     this.setState(
       {
-        ...this.initState(),
+        ...state,
         waiting: true,
       },
       "Ожидание загрузки Модулей"
@@ -50,7 +51,7 @@ class MainState extends StoreModule<IMainInitState> {
       case "начат":
         break;
       case "не начат":
-        this.startModule(moduleId)
+        await this.startModule(moduleId)
         break;
       default:
         break;
@@ -82,7 +83,7 @@ class MainState extends StoreModule<IMainInitState> {
       );
       return;
     }
-    this.load();
+    await this.load(false);
   }
 }
 

@@ -2,6 +2,7 @@ import { IServerResponse } from "../../types";
 
 export interface IMultipleTestInitState {
   taskId: number | null;
+  title: string;
   questions: IQuestion[];
   answers: IAnswer[];
   activeQuestion: {
@@ -15,6 +16,7 @@ export interface IMultipleTestInitState {
 
 export type IMultipleTestResponseLoad = IServerResponse<{
   id: number;
+  description: string;
   questions: IQuestion[];
 }>;
 

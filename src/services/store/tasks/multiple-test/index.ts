@@ -1,3 +1,4 @@
+import { string } from "prop-types";
 import StoreModule from "../../module";
 import { ITaskState } from "../../types";
 import { IMultipleTestInitState, IMultipleTestResponseLoad, IQuestion, IQuestionAnswer, ITaskResponseFinish } from "./types";
@@ -6,6 +7,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> implements I
   initState(): IMultipleTestInitState {
     return {
       taskId: null,
+      title: "",
       questions: [],
       answers: [],
       activeQuestion: null,
@@ -59,6 +61,7 @@ class MultipleTestState extends StoreModule<IMultipleTestInitState> implements I
     });
     this.setState({
       ...this.getState(),
+      title: res.data.data.description,
       questions: questions,
       activeQuestion: {
         question: questions[0],

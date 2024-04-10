@@ -17,10 +17,9 @@ import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
 import { Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function Accordance() {
-  useTitle("Модуль 1 Сопоставление");
   const store = useStore();
   const [activeId, setActiveId] = useState<number | null>(null);
   const params = useParams<{ id: string }>();
@@ -42,6 +41,7 @@ function Accordance() {
     mark: state.accordance.mark,
     waitingLoad: state.accordance.waitingLoad
   }));
+  useTitle(select.title);
 
   const callbacks = {
     handleDragEnd: useCallback(
@@ -101,7 +101,7 @@ function Accordance() {
   };
 
   return (
-    <TaskLayout>
+    <TaskLayout title={select.title}>
       <AccordanceTemplate>
         <Spinner active={select.waitingLoad}>
           {select.title && (

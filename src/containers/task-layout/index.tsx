@@ -11,9 +11,10 @@ import { useNavigate } from "react-router-dom";
 
 interface ITaskLayoutProps {
     children: React.ReactNode;
+    title?: string;
 }
 
-function TaskLayout({children}: ITaskLayoutProps) {
+function TaskLayout({children, title = ""}: ITaskLayoutProps) {
   const store = useStore();
   const navigate = useNavigate();
 
@@ -34,7 +35,7 @@ function TaskLayout({children}: ITaskLayoutProps) {
     <PageLayout>
       <TaskHeaderLayout>
         <ButtonBack onClick={callbacks.onBackButtonClick} />
-        <LevelWrapper title={"Модуль 1"}/>
+        <LevelWrapper title={title}/>
         <TextButton
           text={`${select.user.name} ${select.user.surname}`}
           onClick={callbacks.onTextButtonClick}

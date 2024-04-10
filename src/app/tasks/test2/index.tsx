@@ -22,7 +22,6 @@ import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 function Test2() {
-  useTitle("Модуль 1 Тестирование2");
   const store = useStore();
   const params = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -35,6 +34,7 @@ function Test2() {
   }, [store, params]);
 
   const select = useSelector((state) => ({
+    title: state.multiTest.title,
     questions: state.multiTest.questions,
     answers: state.multiTest.answers,
     activeQuestion: state.multiTest.activeQuestion,
@@ -42,6 +42,7 @@ function Test2() {
     waitingLoad: state.multiTest.waitingLoad,
     mark: state.multiTest.mark,
   }));
+  useTitle(select.title);
 
   const callbacks = {
     onChooseAnswer: useCallback(
@@ -68,7 +69,7 @@ function Test2() {
   };
 
   return (
-    <TaskLayout>
+    <TaskLayout title={select.title}>
       <Spinner active={select.waitingLoad}>
         <TestLayout>
           {select.activeQuestion && (
