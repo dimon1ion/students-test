@@ -1,7 +1,7 @@
 import { memo } from "react";
 import "./style.css";
 import AccDroppableItem from "../acc-droppable-item";
-import AccParentItem from "../../acc-parent-item";
+import AccParentItem from "../acc-parent-item";
 
 interface IAccAnswersItemProps {
   parentId: number;
