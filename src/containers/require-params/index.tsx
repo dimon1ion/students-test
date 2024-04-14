@@ -1,7 +1,7 @@
 import {memo, useEffect} from "react";
 import useSelector from "@src/hooks/use-selector";
 import {useLocation, useNavigate} from "react-router-dom";
-import Spinner from "@src/components/spinner";
+import Spinner from "@src/components/global/spinner";
 import PageLayout from "@src/components/layouts/page-layout";
 
 interface IProtectedProps {

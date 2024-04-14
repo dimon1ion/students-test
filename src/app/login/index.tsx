@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from "react";
 import PageLayout from "../../components/layouts/page-layout";
 import { Checkbox, Form, Input } from "antd";
-import CardLogin from "../../components/card-login";
+import CardLogin from "../../components/global/card-login";
 import HeaderForm from "../../components/ui/header-form";
 import ButtonForm from "../../components/ui/button-form";
 import CardLayout from "../../components/layouts/card-layout";

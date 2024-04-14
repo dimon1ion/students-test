@@ -1,7 +1,7 @@
 import { memo, useCallback } from "react";
-import ModalLayout from "@src/components/modal-layout";
+import ModalLayout from "@src/components/modal-components/modal-layout";
 import useStore from "@src/hooks/use-store";
-import ModalTaskResult from "@src/components/modal-task-result";
+import ModalTaskResult from "@src/components/modal-components/modal-task-result";
 
 interface ITaskResultProps {
     closeModal: (result?: unknown) => void;

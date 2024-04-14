@@ -1,9 +1,9 @@
-import Head from "@src/components/head";
+import Head from "@src/components/global/head";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
 import SideLayout from "@src/components/layouts/side-layout";
 import { Dropdown, MenuProps } from "antd";
-import Avatar from "@src/components/avatar";
-import DropdownItem from "@src/components/dropdown-item";
+import Avatar from "@src/components/global/avatar";
+import DropdownItem from "@src/components/global/dropdown-item";
 import exitIcon from "./exit.svg";
 import useClickOutside from "@src/hooks/use-click-outside";
 import useSelector from "@src/hooks/use-selector";

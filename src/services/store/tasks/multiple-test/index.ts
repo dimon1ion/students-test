@@ -1,4 +1,3 @@
-import { string } from "prop-types";
 import StoreModule from "../../module";
 import { ITaskState } from "../../types";
 import { IMultipleTestInitState, IMultipleTestResponseLoad, IQuestion, IQuestionAnswer, ITaskResponseFinish } from "./types";

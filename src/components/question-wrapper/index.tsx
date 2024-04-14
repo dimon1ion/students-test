@@ -5,7 +5,7 @@ import { cn as bem } from "@bem-react/classname";
 import fullIcon from "./full.svg";
 
 interface IQuestionWrapperProps {
-  img?: string;
+  img?: string | undefined | null;
   text: string;
 }
 

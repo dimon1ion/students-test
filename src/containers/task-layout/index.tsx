@@ -1,9 +1,9 @@
-import ButtonBack from "@src/components/button-back";
+import ButtonBack from "@src/components/global/button-back";
 import PageLayout from "@src/components/layouts/page-layout";
-import LevelWrapper from "@src/components/level-wrapper";
-import TaskContentLayout from "@src/components/task-content-layout";
-import TaskHeaderLayout from "@src/components/task-header-layout";
-import TextButton from "@src/components/text-button";
+import LevelWrapper from "@src/components/global/level-wrapper";
+import TaskContentLayout from "@src/components/task-components/task-content-layout";
+import TaskHeaderLayout from "@src/components/task-components/task-header-layout";
+import TextButton from "@src/components/global/text-button";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import React, { memo, useCallback } from "react";

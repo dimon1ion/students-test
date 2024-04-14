@@ -1,14 +1,14 @@
 import { memo, useCallback, useMemo } from "react";
 import useTitle from "@src/hooks/use-title";
-import ResultLayout from "@src/components/result-layout";
-import ResultUserInfo from "@src/components/result-user-info";
+import ResultLayout from "@src/components/result-components/result-layout";
+import ResultUserInfo from "@src/components/result-components/result-user-info";
 import useSelector from "@src/hooks/use-selector";
 import { Table, TableColumnsType } from "antd";
-import ResultTableLayout from "@src/components/result-table-layout";
+import ResultTableLayout from "@src/components/result-components/result-table-layout";
 import useInit from "@src/hooks/use-init";
 import useStore from "@src/hooks/use-store";
-import ResultTable from "@src/components/result-table";
-import Spinner from "@src/components/spinner";
+import ResultTable from "@src/components/result-components/result-table";
+import Spinner from "@src/components/global/spinner";
 import { useNavigate } from "react-router-dom";
 
 interface ModulesDataType {

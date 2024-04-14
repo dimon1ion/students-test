@@ -1,10 +1,10 @@
-import MainTasksLayout from "@src/components/main-tasks-layout";
-import MainTask from "@src/components/main-task";
-import Spinner from "@src/components/spinner";
+import MainTasksLayout from "@src/components/main-components/main-tasks-layout";
+import MainTask from "@src/components/main-components/main-task";
+import Spinner from "@src/components/global/spinner";
 import useSelector from "@src/hooks/use-selector";
 import { IModule } from "@src/services/store/main/types";
 import { memo, useCallback, useLayoutEffect } from "react";
-import MainModulesLayout from "@src/components/main-modules-layout";
+import MainModulesLayout from "@src/components/main-components/main-modules-layout";
 import { useNavigate } from "react-router-dom";
 import { ModuleStatus, TaskType } from "@src/types";
 import useStore from "@src/hooks/use-store";

@@ -1,14 +1,12 @@
-import AnswerButton from "@src/components/answer-button";
-import LeftSideTaskTemplate from "@src/components/left-side-task-template";
-import ModalTaskResult from "@src/components/modal-task-result";
+import AnswerButton from "@src/components/global/answer-button";
+import LeftSideTaskTemplate from "@src/components/task-components/left-side-task-template";
+import ModalTaskResult from "@src/components/modal-components/modal-task-result";
 import QuestionWrapper from "@src/components/question-wrapper";
-import Spinner from "@src/components/spinner";
-import TaskToggle from "@src/components/task-toggle";
-import TestLayout from "@src/components/test-layout";
-import TestQuestion from "@src/components/test-question";
-import TestRightSideLayout from "@src/components/test-right-side-layout";
-import TestTemplate from "@src/components/test-template";
-import TestTextAnswers from "@src/components/test-text-answers";
+import Spinner from "@src/components/global/spinner";
+import TaskToggle from "@src/components/task-components/task-toggle";
+import TestLayout from "@src/components/test-components/test-layout";
+import TestRightSideLayout from "@src/components/test-components/test-right-side-layout";
+import TestTextAnswers from "@src/components/test-components/test-text-answers";
 import TaskLayout from "@src/containers/task-layout";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
@@ -17,11 +15,11 @@ import {
   IQuestion,
   IQuestionAnswer,
 } from "@src/services/store/tasks/multiple-test/types";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function Test2() {
+function MultipleTest() {
   const store = useStore();
   const params = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -115,4 +113,4 @@ function Test2() {
   );
 }
 
-export default memo(Test2);
+export default memo(MultipleTest);

@@ -1,5 +1,5 @@
 import {memo} from "react";
-import Spinner from "src/components/spinner";
+import Spinner from "@src/components/global/spinner";
 
 interface ISideModulesProps {
 }

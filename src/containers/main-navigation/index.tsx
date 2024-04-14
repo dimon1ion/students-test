@@ -1,6 +1,6 @@
 import { memo, useMemo } from "react";
 import "./style.css";
-import MainNav from "@src/components/main-nav";
+import MainNav from "@src/components/main-components/main-nav";
 
 function MainNavigation() {
   const options = {
