@@ -105,10 +105,13 @@ class InputTestState
       "Ожидание финиша Input Test"
     );
     const data = {
-      data: this.getState().answers
+      data: {
+        task_id: this.getState().taskId,
+        answers: this.getState().answers
+      }
     };
     const res = await this.services.api.request<ITaskResponseFinish>({
-      url: `/api/v1/student/task/imput_test/finish`,
+      url: `/api/v1/student/task/input_test/finish`,
       method: "POST",
       body: JSON.stringify(data),
     });

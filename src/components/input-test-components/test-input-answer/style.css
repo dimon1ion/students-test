@@ -1,0 +1,39 @@
+.TestInputAnswer {
+    position: relative;
+}
+
+.TestInputAnswer-image {
+    object-fit: contain;
+    max-height: 300px;
+}
+
+.TestInputAnswer-input {
+    border-radius: 10px;
+    box-sizing: content-box;
+    /* color: rgb(131, 58, 224); */
+    display: inline-block;
+    font-size: 14px;
+    line-height: 26px;
+    padding: 0px 10px;
+    position: relative;
+    width: 90%;
+    border: 1px solid rgb(191, 136, 242);
+    box-shadow: rgb(191, 136, 242) 0px 0px 0px 1px;
+    text-align: center;
+}
+
+.TestInputAnswer-helpIcon {
+    opacity: 0.5;
+    z-index: 999;
+    margin: 0px;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: normal;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+}

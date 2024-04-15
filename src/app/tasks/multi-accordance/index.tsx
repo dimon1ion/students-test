@@ -16,8 +16,20 @@ import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
 import { Modal } from "antd";
-import { memo, useCallback, useLayoutEffect, useMemo, useState } from "react";
+import React, {
+  memo,
+  useCallback,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import MultiAccRightHead from "@src/components/multi-accordance-components/multi-acc-right-head";
+import MultiAccAnswersItem from "@src/components/multi-accordance-components/multi-acc-answers-item";
+import {
+  IPortable,
+  IResult,
+} from "@src/services/store/tasks/multi-accordance/types";
 
 function Accordance() {
   const store = useStore();
@@ -27,19 +39,20 @@ function Accordance() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    store.actions.accordance.load(Number(params.id), () => {
+    store.actions.multiAccordance.load(Number(params.id), () => {
       navigate("/*", { replace: true });
     });
   }, [store, params]);
 
   const select = useSelector((state) => ({
-    title: state.accordance.description,
-    accordances: state.accordance.accordances,
-    portables: state.accordance.portables,
-    results: state.accordance.result,
-    waiting: state.accordance.waiting,
-    mark: state.accordance.mark,
-    waitingLoad: state.accordance.waitingLoad,
+    title: state.multiAccordance.description,
+    accordances: state.multiAccordance.accordances,
+    portables: state.multiAccordance.portables,
+    columns: state.multiAccordance.columns,
+    results: state.multiAccordance.result,
+    waiting: state.multiAccordance.waiting,
+    mark: state.multiAccordance.mark,
+    waitingLoad: state.multiAccordance.waitingLoad,
   }));
   useTitle(select.title);
 
@@ -47,9 +60,14 @@ function Accordance() {
     handleDragEnd: useCallback(
       (event: DragEndEvent) => {
         setActiveId(null);
-        store.actions.accordance.setResult(
+        store.actions.multiAccordance.setResult(
           Number(event.active.id),
-          event.over === null ? null : Number(event.over.id)
+          event.over?.data.current?.parentId
+            ? Number(event.over.data.current.parentId)
+            : null,
+          event.over?.data.current?.columnId
+            ? Number(event.over.data.current.columnId)
+            : null
         );
       },
       [store, setActiveId]
@@ -61,9 +79,9 @@ function Accordance() {
       [setActiveId]
     ),
     onFinish: useCallback(() => {
-      store.actions.accordance.finishAccordance(() => {
+      store.actions.multiAccordance.finishAccordance(() => {
         setIsOpen(true);
-      }, Number(params.id));
+      });
     }, [store]),
     onNextTask: useCallback(() => {
       setIsOpen(false);
@@ -92,6 +110,7 @@ function Accordance() {
       }
       return (
         <AccDraggableItem
+          size="small"
           id={found.id}
           data={{ value: found.value, value_type: found.value_type }}
           show
@@ -111,7 +130,10 @@ function Accordance() {
                 text="Ответить"
                 onClick={callbacks.onFinish}
                 loading={select.waiting}
-                disabled={select.results.length !== select.accordances.length}
+                disabled={
+                  select.results.length !==
+                  select.accordances.length * select.columns.length
+                }
               />
             </LeftSideTaskTemplate>
           )}
@@ -123,7 +145,7 @@ function Accordance() {
               <AccordanceOptions>
                 {/* Элементы */}
                 {select.portables?.map((item) => (
-                  <AccItemWrapper type="variant" key={item.id}>
+                  <AccItemWrapper size="small" type="variant" key={item.id}>
                     {select.results?.findIndex(
                       (result) => result.portableId === item.id
                     ) == -1 && (
@@ -133,6 +155,7 @@ function Accordance() {
                           value: item.value,
                           value_type: item.value_type,
                         }}
+                        size="small"
                         show={true}
                       />
                     )}
@@ -142,34 +165,53 @@ function Accordance() {
               </AccordanceOptions>
               {select.accordances?.length > 0 && (
                 <AccAnswersWrapper>
+                  <MultiAccRightHead columns={select.columns} />
                   {select.accordances?.map((accordance) => {
-                    const result = select.results?.find(
-                      (result) => result.accordanceId == accordance.id
-                    );
-                    let item = undefined;
-                    if (result !== undefined) {
-                      item = select.portables?.find(
-                        (item) => item.id == result.portableId
-                      );
+                    const result: IResult[] = [];
+                    select.results?.forEach((item) => {
+                      if (item.accordanceId == accordance.id) {
+                        result.push(item);
+                      }
+                    });
+                    let items: { portable: IPortable; columnId: number }[] = [];
+                    if (result.length > 0) {
+                      result.forEach((element) => {
+                        select.portables?.map((item) => {
+                          if (item.id == element.portableId) {
+                            items.push({
+                              portable: item,
+                              columnId: element.columnId,
+                            });
+                          }
+                        });
+                      });
                     }
-                    let element = undefined;
-                    if (item) {
-                      element = (
-                        <AccDraggableItem
-                          id={item.id}
-                          data={{
-                            value: item.value,
-                            value_type: item.value_type,
-                          }}
-                          show
-                        />
-                      );
-                    }
+                    let elements: {
+                      element: React.ReactNode;
+                      columnId: number;
+                    }[] = [];
+                    items.forEach((item) => {
+                      elements.push({
+                        element: (
+                          <AccDraggableItem
+                            id={item.portable.id}
+                            data={{
+                              value: item.portable.value,
+                              value_type: item.portable.value_type,
+                            }}
+                            size="small"
+                            show
+                          />
+                        ),
+                        columnId: item.columnId,
+                      });
+                    });
                     return (
-                      <AccAnswersItem
+                      <MultiAccAnswersItem
                         parentId={accordance.id}
                         key={accordance.id}
-                        element={element}
+                        elements={elements}
+                        columns={select.columns}
                         value={accordance.value}
                         value_type={accordance.value_type}
                       />

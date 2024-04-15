@@ -1,0 +1,22 @@
+.MultiAccRightHead {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    column-gap: 20px;
+    background-color: rgba(60, 73, 191, .2);
+    border-radius: 10px;
+}
+
+.MultiAccRightHead-item {
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+    color: rgb(15, 28, 44);
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    white-space: pre-line;
+    word-break: break-word;
+    text-align: center;
+    user-select: none;
+}

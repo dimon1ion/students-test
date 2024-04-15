@@ -83,7 +83,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> implements ITask
       return result;
     });
     if (
-      foundAnswerIndex != 1 &&
+      foundAnswerIndex != -1 &&
       foundParentIndex != -1 &&
       foundAnswerIndex == foundParentIndex
     ) {

@@ -40,10 +40,3 @@
     border-bottom: 1px solid rgb(219, 219, 219);
     max-height: 200px;
 }
-
-.QuestionWrapper-imageMask {
-    width: 32px;
-    height: 32px;
-    background-color: white;
-    border-radius: 10px;
-}

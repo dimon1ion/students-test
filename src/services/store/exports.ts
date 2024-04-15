@@ -5,3 +5,4 @@ export { default as finishTest } from './tasks/finish-test';
 export { default as accordance } from './tasks/accordance';
 export { default as multiTest } from "./tasks/multiple-test";
 export { default as inputTest } from "./tasks/input-test";
+export { default as multiAccordance } from "./tasks/multi-accordance";

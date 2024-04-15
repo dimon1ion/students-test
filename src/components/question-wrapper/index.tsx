@@ -1,8 +1,7 @@
 import { memo } from "react";
 import "./style.css";
-import { Image } from "antd";
 import { cn as bem } from "@bem-react/classname";
-import fullIcon from "./full.svg";
+import ImageScale from "../global/image-scale";
 
 interface IQuestionWrapperProps {
   img?: string | undefined | null;
@@ -16,7 +15,10 @@ function QuestionWrapper(props: IQuestionWrapperProps) {
     <div className={cn()}>
       {props.img && (
         <div className={cn("imageBlock")}>
-          <Image src={props.img} className={cn("image")} preview={{mask: <img src={fullIcon} className={cn("imageMask")}></img>}}/>
+          <ImageScale
+            src={props.img}
+            className={cn("image")}
+          />
         </div>
       )}
       <div className={cn("text")}>{props.text}</div>

@@ -3,21 +3,18 @@ import LeftSideTaskTemplate from "@src/components/task-components/left-side-task
 import ModalTaskResult from "@src/components/modal-components/modal-task-result";
 import QuestionWrapper from "@src/components/question-wrapper";
 import Spinner from "@src/components/global/spinner";
-import TaskToggle from "@src/components/task-components/task-toggle";
 import TestLayout from "@src/components/test-components/test-layout";
 import TestRightSideLayout from "@src/components/test-components/test-right-side-layout";
-import TestTextAnswers from "@src/components/test-components/test-text-answers";
 import TaskLayout from "@src/containers/task-layout";
 import useSelector from "@src/hooks/use-selector";
 import useStore from "@src/hooks/use-store";
 import useTitle from "@src/hooks/use-title";
-import {
-  IQuestion,
-  IQuestionAnswer,
-} from "@src/services/store/tasks/multiple-test/types";
 import { Modal } from "antd";
 import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import InputTestAnswersLayout from "@src/components/input-test-components/input-test-answers-layout";
+import TestInputAnswer from "@src/components/input-test-components/test-input-answer";
+import { IAnswer } from "@src/services/store/tasks/input-test/types";
 
 function InputTest() {
   const store = useStore();
@@ -26,9 +23,9 @@ function InputTest() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useLayoutEffect(() => {
-    // store.actions.multiTest.load(Number(params.id), () => {
-    //   navigate("/");
-    // });
+    store.actions.inputTest.load(Number(params.id), () => {
+      navigate("/");
+    });
   }, [store, params]);
 
   const select = useSelector((state) => ({
@@ -36,21 +33,21 @@ function InputTest() {
     taskImage: state.inputTest.task_image,
     questions: state.inputTest.questions,
     answers: state.inputTest.answers,
-    waiting: state.multiTest.waiting,
-    waitingLoad: state.multiTest.waitingLoad,
-    mark: state.multiTest.mark,
+    waiting: state.inputTest.waiting,
+    waitingLoad: state.inputTest.waitingLoad,
+    mark: state.inputTest.mark,
   }));
   useTitle(select.description);
 
   const callbacks = {
     onChooseAnswer: useCallback(
-      (question: IQuestion, answerId: IQuestionAnswer["id"]) => {
-        store.actions.multiTest.setAnswer(question, answerId);
+      (questionId: IAnswer["question_id"], studentAnswer: IAnswer["student_answer"]) => {
+        store.actions.inputTest.setAnswer(questionId, studentAnswer);
       },
       [store]
     ),
     onFinish: useCallback(() => {
-      store.actions.multiTest.finishTest(() => {
+      store.actions.inputTest.finishTest(() => {
         setIsOpen(true);
       });
     }, [store]),
@@ -78,7 +75,18 @@ function InputTest() {
               />
             </LeftSideTaskTemplate>
           )}
-
+          <TestRightSideLayout>
+            <InputTestAnswersLayout>
+              {select.questions.map((answer) => (
+                <TestInputAnswer
+                  key={answer.id}
+                  image={answer.image}
+                  prompt={answer.prompt}
+                  onChange={(value: IAnswer["student_answer"]) => callbacks.onChooseAnswer(answer.id, value)}
+                />
+              ))}
+            </InputTestAnswersLayout>
+          </TestRightSideLayout>
         </TestLayout>
       </Spinner>
       <Modal open={isOpen} footer={[]} centered>

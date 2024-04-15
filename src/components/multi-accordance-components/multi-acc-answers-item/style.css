@@ -1,0 +1,10 @@
+.MultiAccAnswersItem {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  align-items: center;
+  /* height: calc(25% - 6px); */
+  /* background: rgb(255, 255, 255); */
+  /* min-height: 90px; */
+  column-gap: 20px;
+}

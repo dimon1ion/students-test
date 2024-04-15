@@ -10,6 +10,7 @@ interface IAccItemProps {
     value_type: "image" | "string" | "order";
     value: string;
   }
+  size?: "small";
 }
 
 function AccDraggableItem(props: IAccItemProps) {
@@ -37,7 +38,7 @@ function AccDraggableItem(props: IAccItemProps) {
       className={cn({isDragging})}
     >
       {props.data.value_type === "image" && <img className={cn("image")} src={props.data.value}/>}
-      {props.data.value_type === "string" && <div className={cn("text")}>{props.data.value}</div>}
+      {props.data.value_type === "string" && <div className={cn("text", {size: props.size})}>{props.data.value}</div>}
     </div>
   );
 }

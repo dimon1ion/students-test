@@ -8,6 +8,8 @@ import Test from "./tasks/finish-test";
 import Accordance from "./tasks/accordance";
 import MultipleTest from "./tasks/multiple-test";
 import Result from "./result";
+import InputTest from "./tasks/input-test";
+import MultiAccordance from "./tasks/multi-accordance";
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
             <Route path="accordance/:id" element={<Protected redirect="/login"><Accordance/></Protected>}/>
             <Route path="test/:id" element={<Protected redirect="/login"><MultipleTest/></Protected>}/>
             <Route path="finish_test/:id" element={<Protected redirect="/login"><Test/></Protected>}/>
+            <Route path="input_test/:id" element={<Protected redirect="/login"><InputTest/></Protected>}/>
+            <Route path="multiple_accordance/:id" element={<Protected redirect="/login"><MultiAccordance/></Protected>}/>
           </Route>
           <Route path={"task"} element={"Как вы сюда попали только вы знаете, но я ценю вашу попытку узнать большее"}/>
           <Route path="*" element={"Как вы сюда попали только вы знаете, но я ценю вашу попытку узнать большее"}/>

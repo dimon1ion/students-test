@@ -1,0 +1,27 @@
+.InputTestAnswersLayout {
+    display: grid;
+    gap: 24px;
+    height: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: auto;
+    width: 100%;
+    padding-top: 14px;
+    padding-right: 10px;
+}
+
+.InputTestAnswersLayout::-webkit-scrollbar {
+    width: 8px;
+}
+
+.InputTestAnswersLayout::-webkit-scrollbar-track {
+    background: none;
+}
+
+.InputTestAnswersLayout::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: rgba(232, 232, 232, .1);
+}
+
+.InputTestAnswersLayout > *:nth-child() {
+    margin-bottom: 24px;
+}

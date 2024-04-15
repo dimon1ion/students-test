@@ -10,9 +10,17 @@
   /* margin-bottom: 24px; */
 }
 
+.AccParentItem_text {
+  background-color: rgb(60, 64, 191);
+}
+
+.AccParentItem_size_small {
+  width: 200px;
+}
+
 .AccParentItem-image {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
   user-select: none;
@@ -20,7 +28,8 @@
 }
 
 .AccParentItem-text {
-  color: rgb(15, 28, 44);
+  /* color: rgb(15, 28, 44); */
+  color: white;
   font-size: 16px;
   font-weight: bold;
   line-height: 20px;
@@ -28,4 +37,8 @@
   word-break: break-word;
   text-align: center;
   user-select: none;
+}
+
+.AccParentItem-text_size_small {
+  font-size: 14px;
 }
