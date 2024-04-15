@@ -15,6 +15,7 @@ interface ModulesDataType {
   key: React.Key;
   name: string;
   score: number;
+  max_score: number;
   tasks: [] | undefined;
 }
 
@@ -51,6 +52,7 @@ function Results() {
       return [
         { title: "Модуль", dataIndex: "name" },
         { title: "Баллы", dataIndex: "score" },
+        { title: "Максимальный балл", dataIndex: "max_score" },
       ];
     }, []),
     modulesData: useMemo<ModulesDataType[]>(() => {
@@ -59,6 +61,7 @@ function Results() {
           key: module.id,
           name: module.module.name,
           score: module.score,
+          max_score: module.module.max_score,
           tasks: undefined,
         };
       });

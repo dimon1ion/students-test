@@ -20,6 +20,7 @@ function MultiAccAnswersItem(props: IMultiAccAnswersItemProps) {
     <div className="MultiAccAnswersItem">
       {props.columns.map((column) => (
         <AccDroppableItem
+          key={crypto.randomUUID()}
           size="small"
           columnId={column.id}
           parentId={props.parentId}

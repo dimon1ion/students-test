@@ -15,6 +15,7 @@ export interface IResult {
   module: {
     id: number;
     name: string;
+    max_score: number;
     tasks_number: number;
     description: null | string;
   };

@@ -33,11 +33,11 @@ class ResultsState extends StoreModule<IResultsInitState> {
       );
       return;
     }
-    const data = Array(6).fill([...res.data.data]).reduce((a, b) => a.concat(b));
+    // const data = Array(6).fill([...res.data.data]).reduce((a, b) => a.concat(b));
     this.setState({
       ...this.getState(),
     //   data: res.data.data,
-      data,
+      data: res.data.data,
       waiting: false,
     });
   }

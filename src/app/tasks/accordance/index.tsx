@@ -69,6 +69,10 @@ function Accordance() {
       setIsOpen(false);
       navigate("/");
     }, [navigate]),
+    onResultNav: useCallback(() => {
+      setIsOpen(false);
+      navigate("/results");
+    }, [navigate]),
   };
 
   const options = {

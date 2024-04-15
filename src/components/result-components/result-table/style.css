@@ -1,8 +1,12 @@
 .ResultTable thead.ant-table-thead > tr:first-child th {
-    background-color: #3c49bf;
+    background-color: rgb(60, 73, 191);
     color: #fff;
   }
 
 .ResultTable-row:nth-child(2n) {
     background-color: rgba(60, 73, 191, 0.1);
+}
+
+.ResultTable-row:hover td {
+  background-color: rgba(60, 73, 191, .2) !important;
 }

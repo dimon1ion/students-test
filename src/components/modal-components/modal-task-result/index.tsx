@@ -6,6 +6,7 @@ interface IModalTaskResultProps {
   text: string;
   mark?: number;
   onNext?: () => void;
+  onResult?: () => void;
 }
 
 function ModalTaskResult(props: IModalTaskResultProps) {
@@ -18,8 +19,8 @@ function ModalTaskResult(props: IModalTaskResultProps) {
         <div className={cn("mark")}>Баллы: {props.mark}</div>
       )}
       <div className={cn("buttons")}>
-        <button className={cn("nextButton")} onClick={props.onNext}>Дальше</button>
-        {/* <button className={cn("repButton")}>Повторить</button> */}
+        <button className={cn("nextButton")} onClick={props.onNext}>{props.onResult ? "Модули" : "Дальше"}</button>
+        {props.onResult && <button className={cn("resButton")} onClick={props.onResult}>К Результатам</button>}
       </div>
     </>
   );
