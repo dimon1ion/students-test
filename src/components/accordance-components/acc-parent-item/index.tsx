@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
+import ImageScale from "@src/components/global/image-scale";
 
 interface IAccParentItemProps {
   value: string,
@@ -14,8 +15,8 @@ function AccParentItem(props: IAccParentItemProps) {
     return;
   }
   return (
-    <div className={cn({size: props.size, text: props.value_type === "string"})}>
-      {props.value_type === "image" && <img className={cn("image")} src={props.value}/>}
+    <div className={cn({size: props.size, text: props.value_type === "string", image: props.value_type === "image"})}>
+      {props.value_type === "image" && <ImageScale className={cn("image")} src={props.value}/>}
       {props.value_type === "string" && <div className={cn("text", {size: props.size})}>{props.value}</div>}
     </div>
   );
