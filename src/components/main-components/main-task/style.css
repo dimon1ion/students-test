@@ -74,3 +74,11 @@
     -webkit-box-orient: vertical;
     user-select: none;
 }
+
+.MainTask-star {
+    object-fit: contain;
+    object-position: center;
+    height: 50%;
+    width: 50%;
+    margin-top: -2px;
+}

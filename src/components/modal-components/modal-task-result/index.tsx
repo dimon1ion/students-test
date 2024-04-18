@@ -19,8 +19,8 @@ function ModalTaskResult(props: IModalTaskResultProps) {
         <div className={cn("mark")}>Баллы: {props.mark}</div>
       )}
       <div className={cn("buttons")}>
-        <button className={cn("nextButton")} onClick={props.onNext}>{props.onResult ? "Модули" : "Дальше"}</button>
         {props.onResult && <button className={cn("resButton")} onClick={props.onResult}>К Результатам</button>}
+        <button className={cn("nextButton")} onClick={props.onNext}>{props.onResult ? "Модули" : "Дальше"}</button>
       </div>
     </>
   );

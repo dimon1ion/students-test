@@ -85,6 +85,15 @@ class MainState extends StoreModule<IMainInitState> {
     }
     await this.load(false);
   }
+
+  checkFinalTask(moduleIndex: number, taskId: number, func: (isFinal: boolean) => void) {
+    let isFinal = false;
+    const tasks = this.getState().modules[moduleIndex].tasks;
+    if (tasks[tasks.length - 1].id == taskId) {
+      isFinal = true;
+    }
+    func(isFinal);
+  }
 }
 
 export default MainState;

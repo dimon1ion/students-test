@@ -14,6 +14,7 @@ export interface IModuleTask {
   module_id: number;
   number: number;
   type: TaskType;
+  isAdditional: boolean;
   description: string;
   image: null;
   status: TaskStatus;

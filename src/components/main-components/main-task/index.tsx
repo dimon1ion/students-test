@@ -5,6 +5,9 @@ import { IModuleTask } from "@src/services/store/main/types";
 import { Tooltip } from "antd";
 import { TaskType } from "@src/types";
 import finishedIcon from "./finished.svg";
+import infoIcon from "./info-icon.svg";
+import starIcon from "./star.svg";
+import starWhiteIcon from "./star-white.svg";
 
 interface IMainTaskProps {
   data: IModuleTask;
@@ -19,10 +22,10 @@ function MainTask(props: IMainTaskProps) {
     onClick: (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
       if (props.data.status === "активно") {
-        props.onClick(props.data.id, props.data.type)
+        props.onClick(props.data.id, props.data.type);
       }
-    }
-  }
+    },
+  };
 
   return (
     <a
@@ -30,9 +33,23 @@ function MainTask(props: IMainTaskProps) {
       className={cn({ active: props.data.status == "активно" })}
       onClick={callbacks.onClick}
     >
-      <div className={cn("circle", { active: props.data.status == "активно"})}>
-        {props.data.status === "закончено" && <img src={finishedIcon} className={cn("finishedIcon")}/>}
-        {props.number}
+      <div className={cn("circle", { active: props.data.status == "активно" })}>
+        {props.data.status === "закончено" && (
+          <img src={finishedIcon} className={cn("finishedIcon")} />
+        )}
+        {props.data.isAdditional && props.data.status !== "закончено" && (
+          <Tooltip title={"Дополнительное задание (Необязательное)"}>
+            <img src={infoIcon} className={cn("finishedIcon")} />
+          </Tooltip>
+        )}
+        {props.data.isAdditional ? (
+          <img
+            src={props.data.status == "активно" ? starIcon : starWhiteIcon}
+            className={cn("star")}
+          />
+        ) : (
+          props.number
+        )}
       </div>
       <div className={cn("title")}>
         <Tooltip title={props.data.description} placement="right">
