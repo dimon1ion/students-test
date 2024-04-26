@@ -2,9 +2,11 @@ import { memo } from "react";
 import { cn as bem } from "@bem-react/classname";
 import "./style.css";
 import ImageScale from "@src/components/global/image-scale";
+import { Tooltip } from "antd";
 
 interface IAccParentItemProps {
-  value: string,
+  value: string;
+  prompt?: string;
   value_type: "order" | "string" | "image";
   size?: "small";
 }
@@ -15,9 +17,19 @@ function AccParentItem(props: IAccParentItemProps) {
     return;
   }
   return (
-    <div className={cn({size: props.size, text: props.value_type === "string", image: props.value_type === "image"})}>
-      {props.value_type === "image" && <ImageScale className={cn("image")} src={props.value}/>}
-      {props.value_type === "string" && <div className={cn("text", {size: props.size})}>{props.value}</div>}
+    <div
+      className={cn({
+        size: props.size,
+        text: props.value_type === "string",
+        image: props.value_type === "image",
+      })}
+    >
+      {props.value_type === "image" && (
+        <Tooltip title={props.prompt}><ImageScale className={cn("image")} src={props.value} /></Tooltip>
+      )}
+      {props.value_type === "string" && (
+        <div className={cn("text", { size: props.size })}>{props.value}</div>
+      )}
     </div>
   );
 }

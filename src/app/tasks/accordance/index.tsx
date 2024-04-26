@@ -97,7 +97,8 @@ function Accordance() {
       return (
         <AccDraggableItem
           id={found.id}
-          data={{ value: found.value, value_type: found.value_type }}
+          data={{ value: found.value, value_type: found.value_type, prompt: found.prompt }}
+          showPrompt={false}
           show
         />
       );
@@ -136,6 +137,7 @@ function Accordance() {
                         data={{
                           value: item.value,
                           value_type: item.value_type,
+                          prompt: item.prompt
                         }}
                         show={true}
                       />
@@ -164,6 +166,7 @@ function Accordance() {
                           data={{
                             value: item.value,
                             value_type: item.value_type,
+                            prompt: item.prompt
                           }}
                           show
                         />
@@ -174,6 +177,7 @@ function Accordance() {
                         parentId={accordance.id}
                         key={accordance.id}
                         element={element}
+                        prompt={accordance.prompt}
                         value={accordance.value}
                         value_type={accordance.value_type}
                       />

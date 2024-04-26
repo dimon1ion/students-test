@@ -32,6 +32,10 @@
   -webkit-user-drag: none;
 }
 
+.AccParentItem-imagePrompt {
+  color: black;
+}
+
 .AccParentItem-text {
   /* color: rgb(15, 28, 44); */
   color: white;

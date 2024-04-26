@@ -27,12 +27,14 @@ export type IAccordanceResponseFinish = IServerResponse<{
 interface IAccordance {
   id: number;
   value: string;
+  prompt?: string;
   value_type: "string" | "image" | "order";
 }
 
 interface IPortable {
   id: number;
   value: string;
+  prompt?: string;
   value_type: "string" | "image" | "order";
 }
 
