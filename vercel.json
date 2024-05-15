@@ -2,11 +2,11 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://senspukj.beget.tech/api/$1"
+      "destination": "http://senspukj.beget.tech/api/$1"
     },
     {
       "source": "/storage/(.*)",
-      "destination": "https://senspukj.beget.tech/storage/$1"
+      "destination": "http://senspukj.beget.tech/storage/$1"
     },
     {"source": "/(.*)", "destination": "/"}
   ]
