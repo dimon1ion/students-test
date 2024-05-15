@@ -19,7 +19,7 @@ export default defineConfig({
       },
       "/storage": {
         // target: "http://127.0.0.1:8000",
-        target: "http://senspulv.beget.tech",
+        target: "https://senspukj.beget.tech",
         secure: false,
         changeOrigin: true,
       }
