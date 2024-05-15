@@ -34,6 +34,7 @@ function Accordance() {
 
   const select = useSelector((state) => ({
     title: state.accordance.description,
+    image: state.accordance.image,
     accordances: state.accordance.accordances,
     portables: state.accordance.portables,
     results: state.accordance.result,
@@ -111,7 +112,7 @@ function Accordance() {
         <Spinner active={select.waitingLoad}>
           {select.title && (
             <LeftSideTaskTemplate>
-              <QuestionWrapper text={select.title} />
+              <QuestionWrapper text={select.title} img={select.image}/>
               <AnswerButton
                 text="Ответить"
                 onClick={callbacks.onFinish}

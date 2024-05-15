@@ -28,7 +28,6 @@ class AccordanceState extends StoreModule<IAccordanceInitState> implements ITask
     const res = await this.services.api.request<IAccordanceResponseLoad>({
       url: `/api/v1/student/task/accordance/${taskId}`,
     });
-    console.log(res);
 
     if (!res.ok) {
       this.setState(
@@ -64,6 +63,7 @@ class AccordanceState extends StoreModule<IAccordanceInitState> implements ITask
     this.setState({
       ...this.getState(),
       description: res.data.data.description,
+      image: res.data.data.task_image,
       portables,
       accordances,
       waitingLoad: false,

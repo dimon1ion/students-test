@@ -15,6 +15,7 @@ export type IAccordanceResponseLoad = IServerResponse<{
   description: string;
   accordances: IAccordance[];
   portables: IPortable[];
+  task_image: string;
 }>;
 
 export type IAccordanceResponseFinish = IServerResponse<{
