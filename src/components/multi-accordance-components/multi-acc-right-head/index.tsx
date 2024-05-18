@@ -5,6 +5,7 @@ import { IColumn } from "@src/services/store/tasks/multi-accordance/types";
 
 interface IMultiAccRightHeadProps {
   columns: IColumn[];
+  columnsName?: string;
 }
 
 function MultiAccRightHead(props: IMultiAccRightHeadProps) {
@@ -17,7 +18,7 @@ function MultiAccRightHead(props: IMultiAccRightHeadProps) {
           {column.name}
         </div>
       ))}
-      <div className={cn("item")}></div>
+      <div className={cn("item")}>{props.columnsName}</div>
     </div>
   );
 }

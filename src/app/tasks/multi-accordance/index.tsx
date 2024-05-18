@@ -48,6 +48,7 @@ function Accordance() {
     title: state.multiAccordance.description,
     accordances: state.multiAccordance.accordances,
     portables: state.multiAccordance.portables,
+    columns_name: state.multiAccordance.columns_name,
     columns: state.multiAccordance.columns,
     results: state.multiAccordance.result,
     waiting: state.multiAccordance.waiting,
@@ -165,7 +166,7 @@ function Accordance() {
               </AccordanceOptions>
               {select.accordances?.length > 0 && (
                 <AccAnswersWrapper>
-                  <MultiAccRightHead columns={select.columns} />
+                  <MultiAccRightHead columns={select.columns} columnsName={select.columns_name}/>
                   {select.accordances?.map((accordance) => {
                     const result: IResult[] = [];
                     select.results?.forEach((item) => {

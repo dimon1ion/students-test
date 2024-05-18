@@ -7,6 +7,7 @@ export interface IMultiAccordanceInitState {
   accordances: IAccordance[];
   portables: IPortable[];
   columns: IColumn[];
+  columns_name: string;
   result: IResult[];
   mark: number | null;
   waiting: boolean;
@@ -19,6 +20,7 @@ export type IMultiAccordanceResponseLoad = IServerResponse<{
   accordances: IAccordance[];
   portables: IPortable[];
   columns: IColumn[];
+  columns_name: string;
 }>;
 
 export type IMultiAccordanceResponseFinish = IServerResponse<{
